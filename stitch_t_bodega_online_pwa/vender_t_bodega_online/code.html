@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
+<title>Tú Bodega Online - Vender</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;family=JetBrains+Mono:wght@500;700&amp;family=Plus+Jakarta+Sans:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary": "#ffffff",
+                        "outline": "#7c7488",
+                        "on-primary-container": "#e7d8ff",
+                        "surface-variant": "#e7deff",
+                        "on-error-container": "#93000a",
+                        "on-surface-variant": "#4a4456",
+                        "surface-container": "#f2ebff",
+                        "on-tertiary-fixed": "#3d0026",
+                        "on-surface": "#1d1735",
+                        "on-primary-fixed-variant": "#5b00c5",
+                        "surface-container-high": "#ece4ff",
+                        "on-primary-fixed": "#250059",
+                        "secondary-fixed-dim": "#70d2ff",
+                        "outline-variant": "#ccc2d9",
+                        "on-secondary-container": "#00516c",
+                        "on-tertiary-container": "#ffd3e4",
+                        "surface-container-low": "#f7f1ff",
+                        "on-secondary": "#ffffff",
+                        "surface-container-highest": "#e7deff",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#d3bbff",
+                        "error-container": "#ffdad6",
+                        "tertiary": "#910060",
+                        "on-secondary-fixed": "#001e2b",
+                        "primary": "#5f00ce",
+                        "tertiary-fixed": "#ffd8e7",
+                        "tertiary-container": "#bc007d",
+                        "on-tertiary-fixed-variant": "#8b005b",
+                        "primary-fixed-dim": "#d3bbff",
+                        "secondary": "#006686",
+                        "error": "#ba1a1a",
+                        "surface-tint": "#7620f1",
+                        "primary-container": "#7a28f5",
+                        "surface-dim": "#ded5fd",
+                        "background": "#fdf7ff",
+                        "inverse-on-surface": "#f5eeff",
+                        "secondary-fixed": "#c0e8ff",
+                        "primary-fixed": "#ebddff",
+                        "inverse-surface": "#322c4b",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#fdf7ff",
+                        "tertiary-fixed-dim": "#ffafd3",
+                        "on-secondary-fixed-variant": "#004d66",
+                        "surface": "#fdf7ff",
+                        "secondary-container": "#45c8fd",
+                        "on-background": "#1d1735",
+                        "magenta-vibrant": "#F03BA6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px",
+                        "sticker": "20px"
+                    },
+                    "spacing": {
+                        "sm": "12px",
+                        "md": "16px",
+                        "safe-area-bottom": "80px",
+                        "xl": "32px",
+                        "xs": "8px",
+                        "lg": "24px",
+                        "base": "4px",
+                        "tap": "48px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Inter", "sans-serif"],
+                        "body-lg": ["Inter", "sans-serif"],
+                        "headline-lg": ["Plus Jakarta Sans", "sans-serif"],
+                        "price-secondary": ["JetBrains Mono", "monospace"],
+                        "price-primary": ["JetBrains Mono", "monospace"],
+                        "label-caps": ["Inter", "sans-serif"],
+                        "headline-md": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg": ["28px", { "lineHeight": "34px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "price-secondary": ["13px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "price-primary": ["18px", { "lineHeight": "22px", "fontWeight": "700" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                        "headline-md": ["22px", { "lineHeight": "28px", "fontWeight": "700" }]
+                    },
+                    "boxShadow": {
+                        "sticker": "0px 4px 20px rgba(122, 40, 245, 0.08)",
+                        "nav-glow": "shadow-[0px_-4px_20px_rgba(122,40,245,0.08)]"
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-lg min-h-screen flex flex-col pb-safe-area-bottom">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky bg-background flex items-center justify-between px-md py-sm z-40">
+<button class="w-tap h-tap flex items-center justify-center text-primary transition-transform active:scale-95 hover:opacity-80">
+<span class="material-symbols-outlined">storefront</span>
+</button>
+<h1 class="font-headline-md text-headline-md text-primary font-bold">Tú Bodega Online</h1>
+<button class="w-tap h-tap flex items-center justify-center text-primary transition-transform active:scale-95 hover:opacity-80">
+<span class="material-symbols-outlined">search</span>
+</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex flex-col px-md gap-md overflow-y-auto">
+<!-- Cart Area (Sticker Card) -->
+<div class="bg-surface-container-lowest rounded-sticker border border-outline-variant shadow-sticker p-md flex flex-col gap-sm">
+<div class="flex justify-between items-center pb-xs border-b border-surface-variant">
+<span class="font-body-sm text-outline font-bold">CARRITO (2)</span>
+<button class="text-primary font-label-caps h-tap flex items-center px-sm transition-transform active:scale-95 hover:opacity-80">VACIAR</button>
+</div>
+<!-- Cart Items -->
+<div class="flex flex-col gap-xs max-h-[150px] overflow-y-auto pr-xs">
+<!-- Item 1 -->
+<div class="flex items-center gap-sm p-xs rounded-lg hover:bg-surface-container-low transition-colors">
+<img class="w-[48px] h-[48px] rounded-[20%] object-cover border border-outline-variant" data-alt="A small, stylized digital illustration of a yellow corn flour packet typical of Venezuelan grocery stores, rendered in a clean, modern UI style with solid vibrant colors and high contrast on a pure white background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzdtusn9M_PDZdbiqr4xWiEfR8LzUfwQshCOnHdszs3NHXbwEq2qx7QkmDidm6Cy-Gikop__6qrM0Y2kR4UZiP5iQPnblNGLY31n9KGwnRn699_ThYCgabet0MZb1R3H2ALUG3LkB_aUNJ0T5LHwg8mrh-AnT4XlmXFAK9FOS_hEadJMtQs6RyXC80rIs9G7c6kTIGfUZvgJYkeZHXT5xgY-EbxqcNiH-NwF-DkPXVyRKDeJ3lKOQ"/>
+<div class="flex-grow">
+<h3 class="font-body-lg text-on-surface truncate">Harina P.A.N.</h3>
+<div class="flex gap-sm">
+<span class="font-price-primary text-primary">$1.20</span>
+<span class="font-price-secondary text-outline self-end mb-0.5">54.00 Bs</span>
+</div>
+</div>
+<button class="h-tap w-tap flex items-center justify-center text-outline transition-transform active:scale-95 hover:text-error">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<!-- Item 2 -->
+<div class="flex items-center gap-sm p-xs rounded-lg hover:bg-surface-container-low transition-colors">
+<img class="w-[48px] h-[48px] rounded-[20%] object-cover border border-outline-variant" data-alt="A small, stylized digital illustration of a white rice bag typical of Venezuelan grocery stores, rendered in a clean, modern UI style with solid vibrant colors and high contrast on a pure white background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3dkjLw4HbWLN4By_K8-0ZyhqYrxSqmL18A_sFPVGp9fQsbkKkww0UCSV-8FyhODJLSg9bdUlJMmGDuZZacZDVJIEPxIV60CDSEk1LEZQMYyZZxqx8CYrvyoziC3quJUcFIB_YCG6odUybQMnLSUF2_ZJZoXh_87qJOytjQaY6fAQKYi2uKceAUOhkG7ryDK50y4IcVd6ZDibL0tZirgDCguhJLIPdEl-0yT7z8MSMuvNOGqVdpqc"/>
+<div class="flex-grow">
+<h3 class="font-body-lg text-on-surface truncate">Arroz Blanco 1kg</h3>
+<div class="flex gap-sm">
+<span class="font-price-primary text-primary">$1.00</span>
+<span class="font-price-secondary text-outline self-end mb-0.5">45.00 Bs</span>
+</div>
+</div>
+<button class="h-tap w-tap flex items-center justify-center text-outline transition-transform active:scale-95 hover:text-error">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+</div>
+<!-- Total -->
+<div class="flex justify-between items-end pt-sm border-t border-surface-variant mt-xs">
+<span class="font-body-lg text-on-surface font-bold">TOTAL</span>
+<div class="flex flex-col items-end">
+<span class="font-headline-md text-headline-md text-primary">$2.20</span>
+<span class="font-price-secondary text-outline">99.00 Bs</span>
+</div>
+</div>
+</div>
+<!-- Quick Entry / Scan -->
+<div class="flex gap-sm">
+<div class="flex-grow bg-surface-container-lowest rounded-sticker border border-outline-variant shadow-sticker h-[56px] flex items-center px-md focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all">
+<span class="material-symbols-outlined text-outline mr-sm">keyboard</span>
+<input class="w-full bg-transparent border-none focus:ring-0 font-body-lg text-on-surface placeholder:text-outline p-0" placeholder="Ingresar monto manual..." readonly="" type="text" value="$ 0.00"/>
+</div>
+<button class="w-[56px] h-[56px] bg-primary rounded-sticker flex items-center justify-center text-on-primary shadow-sticker transition-transform active:scale-95 hover:opacity-90">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">barcode_scanner</span>
+</button>
+</div>
+<!-- Keypad -->
+<div class="grid grid-cols-3 gap-sm mt-auto mb-md">
+<button class="bg-surface-container-lowest rounded-sticker border border-outline-variant h-[64px] flex items-center justify-center font-headline-md text-headline-md text-on-surface shadow-sticker transition-transform active:scale-95 hover:bg-surface-container-low">1</button>
+<button class="bg-surface-container-lowest rounded-sticker border border-outline-variant h-[64px] flex items-center justify-center font-headline-md text-headline-md text-on-surface shadow-sticker transition-transform active:scale-95 hover:bg-surface-container-low">2</button>
+<button class="bg-surface-container-lowest rounded-sticker border border-outline-variant h-[64px] flex items-center justify-center font-headline-md text-headline-md text-on-surface shadow-sticker transition-transform active:scale-95 hover:bg-surface-container-low">3</button>
+<button class="bg-surface-container-lowest rounded-sticker border border-outline-variant h-[64px] flex items-center justify-center font-headline-md text-headline-md text-on-surface shadow-sticker transition-transform active:scale-95 hover:bg-surface-container-low">4</button>
+<button class="bg-surface-container-lowest rounded-sticker border border-outline-variant h-[64px] flex items-center justify-center font-headline-md text-headline-md text-on-surface shadow-sticker transition-transform active:scale-95 hover:bg-surface-container-low">5</button>
+<button class="bg-surface-container-lowest rounded-sticker border border-outline-variant h-[64px] flex items-center justify-center font-headline-md text-headline-md text-on-surface shadow-sticker transition-transform active:scale-95 hover:bg-surface-container-low">6</button>
+<button class="bg-surface-container-lowest rounded-sticker border border-outline-variant h-[64px] flex items-center justify-center font-headline-md text-headline-md text-on-surface shadow-sticker transition-transform active:scale-95 hover:bg-surface-container-low">7</button>
+<button class="bg-surface-container-lowest rounded-sticker border border-outline-variant h-[64px] flex items-center justify-center font-headline-md text-headline-md text-on-surface shadow-sticker transition-transform active:scale-95 hover:bg-surface-container-low">8</button>
+<button class="bg-surface-container-lowest rounded-sticker border border-outline-variant h-[64px] flex items-center justify-center font-headline-md text-headline-md text-on-surface shadow-sticker transition-transform active:scale-95 hover:bg-surface-container-low">9</button>
+<button class="bg-surface-container-lowest rounded-sticker border border-outline-variant h-[64px] flex items-center justify-center font-headline-md text-headline-md text-on-surface shadow-sticker transition-transform active:scale-95 hover:bg-surface-container-low">00</button>
+<button class="bg-surface-container-lowest rounded-sticker border border-outline-variant h-[64px] flex items-center justify-center font-headline-md text-headline-md text-on-surface shadow-sticker transition-transform active:scale-95 hover:bg-surface-container-low">0</button>
+<button class="bg-surface-container-lowest rounded-sticker border border-outline-variant h-[64px] flex items-center justify-center text-on-surface shadow-sticker transition-transform active:scale-95 hover:bg-surface-container-low">
+<span class="material-symbols-outlined">backspace</span>
+</button>
+</div>
+<!-- Action Button -->
+<button class="w-full h-[56px] rounded-full bg-magenta-vibrant flex items-center justify-center gap-sm font-headline-md text-headline-md text-on-primary shadow-sticker transition-transform active:scale-95 mb-md sticky bottom-md z-30">
+            Cobrar $2.20
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">payments</span>
+</button>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 h-[80px] bg-surface-container-lowest border-t border-outline-variant shadow-[0px_-4px_20px_rgba(122,40,245,0.08)] flex justify-around items-center px-xs pb-safe-area-bottom md:hidden">
+<!-- Inicio (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-all duration-200 active:scale-90 w-tap h-tap" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-caps text-label-caps mt-1">Inicio</span>
+</a>
+<!-- Productos (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-all duration-200 active:scale-90 w-tap h-tap" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-label-caps text-label-caps mt-1">Productos</span>
+</a>
+<!-- Vender (Active - Magenta Elevated) -->
+<a class="flex flex-col items-center justify-center font-bold bg-magenta-vibrant text-on-primary rounded-full -mt-8 w-16 h-16 shadow-lg transition-all duration-200 active:scale-90 border-[4px] border-background relative" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add_shopping_cart</span>
+<!-- Hidden label for screen readers, visual is just icon due to design constraint -->
+<span class="sr-only">Vender</span>
+</a>
+<!-- Gastos (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-all duration-200 active:scale-90 w-tap h-tap" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-label-caps text-label-caps mt-1">Gastos</span>
+</a>
+<!-- Historial (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-all duration-200 active:scale-90 w-tap h-tap" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-label-caps text-label-caps mt-1">Historial</span>
+</a>
+</nav>
+</body></html>

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Historial - Tú Bodega Online</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;family=Plus+Jakarta+Sans:wght@700;800&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-container": "#45c8fd",
+                        "surface-container-high": "#ece4ff",
+                        "on-primary-fixed": "#250059",
+                        "error-container": "#ffdad6",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "secondary": "#006686",
+                        "surface-bright": "#fdf7ff",
+                        "primary-container": "#7a28f5",
+                        "on-secondary-container": "#00516c",
+                        "surface-container-highest": "#e7deff",
+                        "primary": "#5f00ce",
+                        "on-secondary-fixed": "#001e2b",
+                        "tertiary-fixed-dim": "#ffafd3",
+                        "surface": "#fdf7ff",
+                        "secondary-fixed": "#c0e8ff",
+                        "on-secondary-fixed-variant": "#004d66",
+                        "surface-variant": "#e7deff",
+                        "surface-container-low": "#f7f1ff",
+                        "secondary-fixed-dim": "#70d2ff",
+                        "primary-fixed-dim": "#d3bbff",
+                        "on-tertiary-container": "#ffd3e4",
+                        "on-primary-fixed-variant": "#5b00c5",
+                        "primary-fixed": "#ebddff",
+                        "on-secondary": "#ffffff",
+                        "on-background": "#1d1735",
+                        "surface-dim": "#ded5fd",
+                        "surface-container": "#f2ebff",
+                        "on-tertiary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-primary-container": "#e7d8ff",
+                        "on-tertiary-fixed": "#3d0026",
+                        "inverse-primary": "#d3bbff",
+                        "background": "#fdf7ff",
+                        "inverse-on-surface": "#f5eeff",
+                        "tertiary": "#910060",
+                        "on-tertiary-fixed-variant": "#8b005b",
+                        "tertiary-container": "#bc007d",
+                        "error": "#ba1a1a",
+                        "inverse-surface": "#322c4b",
+                        "outline": "#7c7488",
+                        "outline-variant": "#ccc2d9",
+                        "surface-tint": "#7620f1",
+                        "on-surface": "#1d1735",
+                        "tertiary-fixed": "#ffd8e7",
+                        "on-surface-variant": "#4a4456",
+                        "on-primary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px",
+                        "sticker": "20px"
+                    },
+                    "spacing": {
+                        "xl": "32px",
+                        "base": "4px",
+                        "xs": "8px",
+                        "safe-area-bottom": "80px",
+                        "md": "16px",
+                        "sm": "12px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Inter"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "body-lg": ["Inter"],
+                        "price-secondary": ["JetBrains Mono"],
+                        "label-caps": ["Inter"],
+                        "price-primary": ["JetBrains Mono"],
+                        "headline-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-md": ["22px", { "lineHeight": "28px", "fontWeight": "700" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "price-secondary": ["13px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                        "price-primary": ["18px", { "lineHeight": "22px", "fontWeight": "700" }],
+                        "headline-lg": ["28px", { "lineHeight": "34px", "letterSpacing": "-0.02em", "fontWeight": "800" }]
+                    },
+                    "boxShadow": {
+                        "sticker": "0px 4px 20px rgba(122, 40, 245, 0.08)",
+                        "nav": "0px -4px 20px rgba(122, 40, 245, 0.08)"
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .bg-gradient-vender { background: linear-gradient(135deg, #bc007d 0%, #7a28f5 100%); }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen pb-[100px] flex flex-col md:items-center">
+<!-- Mobile Container (Max width for web viewing) -->
+<main class="w-full max-w-[480px] bg-background min-h-screen relative flex flex-col shadow-2xl">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky bg-background flex items-center justify-between px-md py-sm z-40 transition-transform active:scale-95 no-shadow">
+<button class="flex items-center justify-center p-xs text-primary dark:text-primary-fixed-dim hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md text-primary font-bold">Historial</h1>
+<button class="flex items-center justify-center p-xs text-primary dark:text-primary-fixed-dim hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">ios_share</span>
+</button>
+</header>
+<!-- Content Area -->
+<div class="px-md flex-1 flex flex-col gap-lg pb-xl pt-sm">
+<!-- Date Selector (Horizontal Scroll) -->
+<section class="w-full overflow-x-auto hide-scrollbar -mx-md px-md pb-xs">
+<div class="flex gap-sm">
+<!-- Date Pill 1 -->
+<button class="flex flex-col items-center justify-center min-w-[56px] min-h-[64px] rounded-sticker border border-outline-variant bg-surface-container-lowest text-on-surface-variant transition-transform active:scale-95">
+<span class="font-label-caps text-label-caps uppercase opacity-70">Mar</span>
+<span class="font-headline-md text-headline-md">12</span>
+</button>
+<!-- Date Pill 2 (Selected) -->
+<button class="flex flex-col items-center justify-center min-w-[56px] min-h-[64px] rounded-sticker border border-primary-container bg-primary-container text-on-primary-container shadow-sticker transition-transform active:scale-95">
+<span class="font-label-caps text-label-caps uppercase opacity-90">Mié</span>
+<span class="font-headline-md text-headline-md">13</span>
+</button>
+<!-- Date Pill 3 -->
+<button class="flex flex-col items-center justify-center min-w-[56px] min-h-[64px] rounded-sticker border border-outline-variant bg-surface-container-lowest text-on-surface-variant transition-transform active:scale-95">
+<span class="font-label-caps text-label-caps uppercase opacity-70">Jue</span>
+<span class="font-headline-md text-headline-md">14</span>
+</button>
+<!-- Date Pill 4 -->
+<button class="flex flex-col items-center justify-center min-w-[56px] min-h-[64px] rounded-sticker border border-outline-variant bg-surface-container-lowest text-on-surface-variant transition-transform active:scale-95">
+<span class="font-label-caps text-label-caps uppercase opacity-70">Vie</span>
+<span class="font-headline-md text-headline-md">15</span>
+</button>
+<!-- Date Pill 5 -->
+<button class="flex flex-col items-center justify-center min-w-[56px] min-h-[64px] rounded-sticker border border-outline-variant bg-surface-container-lowest text-on-surface-variant transition-transform active:scale-95">
+<span class="font-label-caps text-label-caps uppercase opacity-70">Sáb</span>
+<span class="font-headline-md text-headline-md">16</span>
+</button>
+</div>
+</section>
+<!-- Summary Bento Card -->
+<section class="grid grid-cols-2 gap-sm">
+<!-- Balance (Spans 2 cols) -->
+<div class="col-span-2 bg-surface-container-lowest border border-outline-variant rounded-sticker p-md shadow-sticker flex flex-col justify-center relative overflow-hidden">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-surface-container rounded-full opacity-50 blur-xl"></div>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider mb-xs">Balance del Día</span>
+<div class="flex items-end gap-sm">
+<span class="font-price-primary text-headline-lg text-primary">$45.50</span>
+<span class="font-price-secondary text-price-secondary text-on-surface-variant mb-[6px]">Bs 1,660.75</span>
+</div>
+</div>
+<!-- Ventas -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-sticker p-sm shadow-sticker flex flex-col">
+<div class="flex items-center gap-xs mb-sm">
+<div class="w-8 h-8 rounded-full bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">arrow_upward</span>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Ventas</span>
+</div>
+<span class="font-price-primary text-price-primary text-on-background">$65.50</span>
+<span class="font-price-secondary text-price-secondary text-on-surface-variant opacity-70">Bs 2,390.75</span>
+</div>
+<!-- Gastos -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-sticker p-sm shadow-sticker flex flex-col">
+<div class="flex items-center gap-xs mb-sm">
+<div class="w-8 h-8 rounded-full bg-error-container flex items-center justify-center text-on-error-container">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">arrow_downward</span>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Gastos</span>
+</div>
+<span class="font-price-primary text-price-primary text-on-background">$20.00</span>
+<span class="font-price-secondary text-price-secondary text-on-surface-variant opacity-70">Bs 730.00</span>
+</div>
+</section>
+<!-- Timeline List -->
+<section class="flex flex-col gap-sm">
+<h2 class="font-headline-md text-body-lg font-bold text-on-background mb-xs">Actividad</h2>
+<!-- Sale Item (Expandable) -->
+<button class="w-full bg-surface-container-lowest border border-outline-variant rounded-sticker p-sm shadow-sticker flex flex-col gap-sm text-left transition-transform active:scale-[0.98]">
+<div class="flex items-center justify-between w-full">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed shrink-0">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">shopping_bag</span>
+</div>
+<div class="flex flex-col">
+<span class="font-body-lg text-body-lg font-bold text-on-background line-clamp-1">Venta #1048</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">14:30 PM • Efectivo</span>
+</div>
+</div>
+<div class="flex flex-col items-end text-right">
+<span class="font-price-primary text-price-primary text-secondary">+ $15.50</span>
+<span class="font-price-secondary text-price-secondary text-on-surface-variant">Bs 565.75</span>
+</div>
+</div>
+<!-- Expanded Details (Simulated visible state for design) -->
+<div class="w-full pt-sm border-t border-surface-variant flex flex-col gap-xs pl-14">
+<div class="flex justify-between items-center w-full">
+<span class="font-body-sm text-body-sm text-on-surface-variant">2x Harina PAN</span>
+<span class="font-price-secondary text-price-secondary text-on-background">$3.00</span>
+</div>
+<div class="flex justify-between items-center w-full">
+<span class="font-body-sm text-body-sm text-on-surface-variant">1x Queso Llanero (Kg)</span>
+<span class="font-price-secondary text-price-secondary text-on-background">$6.50</span>
+</div>
+<div class="flex justify-between items-center w-full">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Coca-Cola 2L</span>
+<span class="font-price-secondary text-price-secondary text-on-background">$6.00</span>
+</div>
+</div>
+</button>
+<!-- Expense Item -->
+<button class="w-full bg-surface-container-lowest border border-outline-variant rounded-sticker p-sm shadow-sticker flex items-center justify-between text-left transition-transform active:scale-[0.98]">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-error-container flex items-center justify-center text-on-error-container shrink-0">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">receipt_long</span>
+</div>
+<div class="flex flex-col">
+<span class="font-body-lg text-body-lg font-bold text-on-background line-clamp-1">Compra Mercancía</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">10:15 AM • Proveedor</span>
+</div>
+</div>
+<div class="flex flex-col items-end text-right">
+<span class="font-price-primary text-price-primary text-error">- $20.00</span>
+<span class="font-price-secondary text-price-secondary text-on-surface-variant">Bs 730.00</span>
+</div>
+</button>
+<!-- Sale Item -->
+<button class="w-full bg-surface-container-lowest border border-outline-variant rounded-sticker p-sm shadow-sticker flex items-center justify-between text-left transition-transform active:scale-[0.98]">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed shrink-0">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">shopping_bag</span>
+</div>
+<div class="flex flex-col">
+<span class="font-body-lg text-body-lg font-bold text-on-background line-clamp-1">Venta #1047</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">09:45 AM • Pago Móvil</span>
+</div>
+</div>
+<div class="flex flex-col items-end text-right">
+<span class="font-price-primary text-price-primary text-secondary">+ $50.00</span>
+<span class="font-price-secondary text-price-secondary text-on-surface-variant">Bs 1,825.00</span>
+</div>
+</button>
+</section>
+</div>
+<!-- BottomNavBar -->
+<nav class="bg-surface-container-lowest dark:bg-surface-container-lowest fixed bottom-0 w-full max-w-[480px] z-50 h-[80px] border-t border-outline-variant shadow-nav flex justify-around items-center px-xs pb-safe-area-bottom md:w-[480px]">
+<!-- Inicio (Inactive) -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-all duration-200 active:scale-90 w-16 h-full">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 0;">home</span>
+<span class="font-label-caps text-label-caps">Inicio</span>
+</button>
+<!-- Productos (Inactive) -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-all duration-200 active:scale-90 w-16 h-full">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 0;">inventory_2</span>
+<span class="font-label-caps text-label-caps">Productos</span>
+</button>
+<!-- Vender (Center Elevated) -->
+<button class="flex flex-col items-center justify-center text-primary font-bold bg-tertiary-container text-on-tertiary-container rounded-full -mt-8 w-16 h-16 shadow-lg hover:bg-surface-container-low transition-all duration-200 active:scale-90 bg-gradient-vender border-4 border-background">
+<span class="material-symbols-outlined text-[32px] text-white" style="font-variation-settings: 'FILL' 1;">add_shopping_cart</span>
+</button>
+<!-- Gastos (Inactive) -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-all duration-200 active:scale-90 w-16 h-full">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 0;">payments</span>
+<span class="font-label-caps text-label-caps">Gastos</span>
+</button>
+<!-- Historial (Active) -->
+<button class="flex flex-col items-center justify-center text-primary font-bold hover:bg-surface-container-low transition-all duration-200 active:scale-90 w-16 h-full">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">history</span>
+<span class="font-label-caps text-label-caps">Historial</span>
+</button>
+</nav>
+</main>
+</body></html>

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Tú Bodega Online - Inicio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&amp;family=JetBrains+Mono:wght@500;700&amp;family=Plus+Jakarta+Sans:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary": "#ffffff",
+                      "outline": "#7c7488",
+                      "on-primary-container": "#e7d8ff",
+                      "surface-variant": "#e7deff",
+                      "on-error-container": "#93000a",
+                      "on-surface-variant": "#4a4456",
+                      "surface-container": "#f2ebff",
+                      "on-tertiary-fixed": "#3d0026",
+                      "on-surface": "#1d1735",
+                      "on-primary-fixed-variant": "#5b00c5",
+                      "surface-container-high": "#ece4ff",
+                      "on-primary-fixed": "#250059",
+                      "secondary-fixed-dim": "#70d2ff",
+                      "outline-variant": "#ccc2d9",
+                      "on-secondary-container": "#00516c",
+                      "on-tertiary-container": "#ffd3e4",
+                      "surface-container-low": "#f7f1ff",
+                      "on-secondary": "#ffffff",
+                      "surface-container-highest": "#e7deff",
+                      "on-primary": "#ffffff",
+                      "on-error": "#ffffff",
+                      "inverse-primary": "#d3bbff",
+                      "error-container": "#ffdad6",
+                      "tertiary": "#910060",
+                      "on-secondary-fixed": "#001e2b",
+                      "primary": "#5f00ce",
+                      "tertiary-fixed": "#ffd8e7",
+                      "tertiary-container": "#bc007d",
+                      "on-tertiary-fixed-variant": "#8b005b",
+                      "primary-fixed-dim": "#d3bbff",
+                      "secondary": "#006686",
+                      "error": "#ba1a1a",
+                      "surface-tint": "#7620f1",
+                      "primary-container": "#7a28f5",
+                      "surface-dim": "#ded5fd",
+                      "background": "#fdf7ff",
+                      "inverse-on-surface": "#f5eeff",
+                      "secondary-fixed": "#c0e8ff",
+                      "primary-fixed": "#ebddff",
+                      "inverse-surface": "#322c4b",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-bright": "#fdf7ff",
+                      "tertiary-fixed-dim": "#ffafd3",
+                      "on-secondary-fixed-variant": "#004d66",
+                      "surface": "#fdf7ff",
+                      "secondary-container": "#45c8fd",
+                      "on-background": "#1d1735"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "sm": "12px",
+                      "md": "16px",
+                      "safe-area-bottom": "80px",
+                      "xl": "32px",
+                      "xs": "8px",
+                      "lg": "24px",
+                      "base": "4px"
+              },
+              "fontFamily": {
+                      "body-sm": [
+                              "Inter"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "headline-lg": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "price-secondary": [
+                              "JetBrains Mono"
+                      ],
+                      "price-primary": [
+                              "JetBrains Mono"
+                      ],
+                      "label-caps": [
+                              "Inter"
+                      ],
+                      "headline-md": [
+                              "Plus Jakarta Sans"
+                      ]
+              },
+              "fontSize": {
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-lg": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg": [
+                              "28px",
+                              {
+                                      "lineHeight": "34px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "price-secondary": [
+                              "13px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "price-primary": [
+                              "18px",
+                              {
+                                      "lineHeight": "22px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-caps": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-md": [
+                              "22px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        .sticker-card {
+            background-color: #ffffff;
+            border: 1px solid #E9E1FB;
+            box-shadow: 0px 4px 20px rgba(122, 40, 245, 0.08);
+            border-radius: 20px;
+        }
+        .primary-gradient {
+            background: linear-gradient(135deg, #7a28f5 0%, #bc007d 100%);
+        }
+      </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-lg min-h-screen pb-safe-area-bottom">
+<!-- TopAppBar -->
+<header class="bg-background dark:bg-background text-primary dark:text-primary-fixed-dim font-headline-md text-headline-md w-full top-0 sticky no-shadow flex items-center justify-between px-md py-sm w-full z-40">
+<button class="text-on-surface-variant hover:opacity-80 transition-transform active:scale-95 flex items-center justify-center p-2 rounded-full">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">storefront</span>
+</button>
+<h1 class="font-headline-md text-headline-md text-primary font-bold">Tú Bodega Online</h1>
+<button class="text-on-surface-variant hover:opacity-80 transition-transform active:scale-95 flex items-center justify-center p-2 rounded-full">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">search</span>
+</button>
+</header>
+<!-- Main Content -->
+<main class="p-md space-y-lg max-w-2xl mx-auto">
+<!-- Ventas de hoy (Sticker Card Gradient) -->
+<section class="sticker-card p-lg primary-gradient text-on-primary relative overflow-hidden group hover:scale-[1.01] transition-transform duration-300">
+<!-- Decorative Abstract Shapes -->
+<div class="absolute -right-8 -top-8 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
+<div class="absolute -left-12 -bottom-12 w-40 h-40 bg-black/10 rounded-full blur-3xl"></div>
+<div class="relative z-10 flex flex-col items-center text-center space-y-sm">
+<h2 class="font-body-lg text-body-lg text-on-primary/90 font-medium tracking-wide uppercase text-sm">Ventas de hoy</h2>
+<div class="flex flex-col items-center">
+<span class="font-headline-lg text-headline-lg text-on-primary font-extrabold tracking-tight">$145.50</span>
+<span class="font-price-secondary text-price-secondary text-on-primary/80 mt-1">6,547.50 Bs</span>
+</div>
+</div>
+</section>
+<!-- Quick Actions -->
+<section class="grid grid-cols-2 gap-md">
+<button class="bg-primary-container text-on-primary h-12 rounded-full font-body-lg text-body-lg font-bold flex items-center justify-center gap-2 hover:bg-primary transition-colors active:scale-95 shadow-md">
+<span class="material-symbols-outlined text-[20px]">add_circle</span>
+                Nueva Venta
+            </button>
+<button class="bg-surface-variant text-on-surface-variant h-12 rounded-full font-body-lg text-body-lg font-bold flex items-center justify-center gap-2 hover:bg-outline-variant transition-colors active:scale-95 border border-outline-variant/50">
+<span class="material-symbols-outlined text-[20px]">inventory_2</span>
+                Recibir
+            </button>
+</section>
+<!-- Resumen de Caja (Bento Grid Style) -->
+<section class="space-y-md">
+<h3 class="font-headline-md text-headline-md text-on-surface font-bold px-xs">Resumen de Caja</h3>
+<div class="grid grid-cols-2 gap-md">
+<!-- Efectivo $ -->
+<div class="sticker-card p-md flex flex-col justify-between h-32 hover:border-primary-container/50 transition-colors">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-tertiary-container bg-tertiary-container/10 p-1.5 rounded-full text-[18px]">payments</span>
+<span class="font-body-sm text-body-sm font-medium">Efectivo $</span>
+</div>
+<div class="mt-auto">
+<span class="font-price-primary text-price-primary text-on-surface block">$85.00</span>
+</div>
+</div>
+<!-- Pago Móvil -->
+<div class="sticker-card p-md flex flex-col justify-between h-32 hover:border-primary-container/50 transition-colors">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-secondary bg-secondary/10 p-1.5 rounded-full text-[18px]">phone_iphone</span>
+<span class="font-body-sm text-body-sm font-medium">Pago Móvil</span>
+</div>
+<div class="mt-auto">
+<span class="font-price-primary text-price-primary text-on-surface block">2,450.00 Bs</span>
+<span class="font-price-secondary text-price-secondary text-outline block text-xs mt-0.5">≈ $54.44</span>
+</div>
+</div>
+<!-- Zelle / Otros -->
+<div class="sticker-card p-md flex flex-col justify-between h-32 col-span-2 hover:border-primary-container/50 transition-colors">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-primary bg-primary/10 p-1.5 rounded-full text-[18px]">account_balance</span>
+<span class="font-body-sm text-body-sm font-medium">Transferencias Int.</span>
+</div>
+<span class="bg-surface-variant text-on-surface-variant px-2 py-1 rounded-full text-[10px] font-bold tracking-wider">HOY</span>
+</div>
+<div class="mt-auto flex justify-between items-end">
+<span class="font-price-primary text-price-primary text-on-surface block">$60.50</span>
+<span class="text-xs text-outline font-body-sm flex items-center gap-1"><span class="material-symbols-outlined text-[14px] text-green-500">trending_up</span> +12%</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Actividad Reciente (List) -->
+<section class="space-y-md pt-sm">
+<div class="flex justify-between items-end px-xs">
+<h3 class="font-headline-md text-headline-md text-on-surface font-bold">Actividad Reciente</h3>
+<a class="font-body-sm text-body-sm text-primary font-medium hover:underline" href="#">Ver todo</a>
+</div>
+<div class="sticker-card divide-y divide-outline-variant/30">
+<!-- Item 1 -->
+<div class="p-md flex items-center justify-between hover:bg-surface-container-lowest transition-colors cursor-pointer">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center text-primary font-bold">
+                             H
+                         </div>
+<div>
+<p class="font-body-lg text-body-lg font-medium text-on-surface">Harina Pan x3, Queso...</p>
+<p class="font-body-sm text-body-sm text-outline">10:45 AM • Pago Móvil</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-price-primary text-price-primary text-on-surface">$5.50</p>
+<p class="font-price-secondary text-price-secondary text-outline text-xs">247.50 Bs</p>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="p-md flex items-center justify-between hover:bg-surface-container-lowest transition-colors cursor-pointer">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-tertiary-container/20 flex items-center justify-center text-tertiary-container font-bold">
+                             R
+                         </div>
+<div>
+<p class="font-body-lg text-body-lg font-medium text-on-surface">Refresco 2L, Galletas</p>
+<p class="font-body-sm text-body-sm text-outline">09:30 AM • Efectivo</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-price-primary text-price-primary text-on-surface">$3.00</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="bg-surface-container-lowest dark:bg-surface-container-lowest text-primary dark:text-primary-fixed-dim font-label-caps text-label-caps fixed bottom-0 w-full z-50 h-[80px] shadow-[0px_-4px_20px_rgba(122,40,245,0.08)] flex justify-around items-center w-full px-xs pb-safe-area-bottom md:hidden">
+<!-- Inicio (Active) -->
+<a class="flex flex-col items-center justify-center text-primary font-bold hover:bg-surface-container-low transition-all duration-200 active:scale-90 w-16 h-full pt-2" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">home</span>
+<span>Inicio</span>
+</a>
+<!-- Productos (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-all duration-200 active:scale-90 w-16 h-full pt-2" href="#">
+<span class="material-symbols-outlined mb-1">inventory_2</span>
+<span>Productos</span>
+</a>
+<!-- Vender (Elevated FAB-style slot) -->
+<a class="flex flex-col items-center justify-center bg-tertiary-container text-on-tertiary-container rounded-full -mt-8 w-16 h-16 shadow-lg hover:bg-surface-container-low transition-all duration-200 active:scale-90" href="#">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">add_shopping_cart</span>
+</a>
+<!-- Gastos (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-all duration-200 active:scale-90 w-16 h-full pt-2" href="#">
+<span class="material-symbols-outlined mb-1">payments</span>
+<span>Gastos</span>
+</a>
+<!-- Historial (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-all duration-200 active:scale-90 w-16 h-full pt-2" href="#">
+<span class="material-symbols-outlined mb-1">history</span>
+<span>Historial</span>
+</a>
+</nav>
+</body></html>

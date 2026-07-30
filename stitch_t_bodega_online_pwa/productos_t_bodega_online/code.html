@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+
+<html lang="es-VE"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
+<title>Tú Bodega Online - Productos</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;family=JetBrains+Mono:wght@500;700&amp;family=Plus+Jakarta+Sans:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary": "#ffffff",
+                        "outline": "#7c7488",
+                        "on-primary-container": "#e7d8ff",
+                        "surface-variant": "#e7deff",
+                        "on-error-container": "#93000a",
+                        "on-surface-variant": "#4a4456",
+                        "surface-container": "#f2ebff",
+                        "on-tertiary-fixed": "#3d0026",
+                        "on-surface": "#1d1735",
+                        "on-primary-fixed-variant": "#5b00c5",
+                        "surface-container-high": "#ece4ff",
+                        "on-primary-fixed": "#250059",
+                        "secondary-fixed-dim": "#70d2ff",
+                        "outline-variant": "#ccc2d9",
+                        "on-secondary-container": "#00516c",
+                        "on-tertiary-container": "#ffd3e4",
+                        "surface-container-low": "#f7f1ff",
+                        "on-secondary": "#ffffff",
+                        "surface-container-highest": "#e7deff",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#d3bbff",
+                        "error-container": "#ffdad6",
+                        "tertiary": "#910060",
+                        "on-secondary-fixed": "#001e2b",
+                        "primary": "#5f00ce",
+                        "tertiary-fixed": "#ffd8e7",
+                        "tertiary-container": "#bc007d",
+                        "on-tertiary-fixed-variant": "#8b005b",
+                        "primary-fixed-dim": "#d3bbff",
+                        "secondary": "#006686",
+                        "error": "#ba1a1a",
+                        "surface-tint": "#7620f1",
+                        "primary-container": "#7a28f5",
+                        "surface-dim": "#ded5fd",
+                        "background": "#fdf7ff",
+                        "inverse-on-surface": "#f5eeff",
+                        "secondary-fixed": "#c0e8ff",
+                        "primary-fixed": "#ebddff",
+                        "inverse-surface": "#322c4b",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#fdf7ff",
+                        "tertiary-fixed-dim": "#ffafd3",
+                        "on-secondary-fixed-variant": "#004d66",
+                        "surface": "#fdf7ff",
+                        "secondary-container": "#45c8fd",
+                        "on-background": "#1d1735"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "12px",
+                        "md": "16px",
+                        "safe-area-bottom": "80px",
+                        "xl": "32px",
+                        "xs": "8px",
+                        "lg": "24px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "price-secondary": ["JetBrains Mono"],
+                        "price-primary": ["JetBrains Mono"],
+                        "label-caps": ["Inter"],
+                        "headline-md": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg": ["28px", { "lineHeight": "34px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "price-secondary": ["13px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "price-primary": ["18px", { "lineHeight": "22px", "fontWeight": "700" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                        "headline-md": ["22px", { "lineHeight": "28px", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        /* Sticker Effect Adjustments */
+        .sticker-card {
+            background-color: theme('colors.surface-container-lowest');
+            border: 1px solid theme('colors.surface-variant');
+            box-shadow: 0px 4px 20px rgba(122, 40, 245, 0.08);
+            border-radius: 20px;
+        }
+        
+        .sticker-card-alert {
+             border: 1px solid theme('colors.error');
+        }
+
+        /* Hide scrollbar for clean horizontal scrolling */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-lg min-h-screen pb-[100px] antialiased">
+<!-- TopAppBar -->
+<header class="bg-background dark:bg-background w-full top-0 sticky z-40 bg-background flex items-center justify-between px-md py-sm w-full no-shadow">
+<button class="text-primary dark:text-primary-fixed-dim hover:opacity-80 transition-transform active:scale-95 p-xs rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined">storefront</span>
+</button>
+<h1 class="font-headline-md text-headline-md text-primary font-bold text-center flex-1">
+            Tú Bodega Online
+        </h1>
+<button class="text-primary dark:text-primary-fixed-dim hover:opacity-80 transition-transform active:scale-95 p-xs rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined">search</span>
+</button>
+</header>
+<!-- Main Canvas -->
+<main class="px-lg pt-sm pb-xl max-w-2xl mx-auto space-y-lg">
+<!-- Search & Filter Bar -->
+<div class="relative">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full h-[56px] pl-[48px] pr-md rounded-[12px] border border-outline-variant bg-surface-container-lowest text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors font-body-lg" placeholder="Buscar productos..." type="text"/>
+</div>
+<!-- Category Chips -->
+<div class="flex gap-sm overflow-x-auto no-scrollbar pb-xs">
+<button class="h-[48px] px-md rounded-full bg-primary-container text-on-primary-container font-body-sm font-bold whitespace-nowrap shrink-0 flex items-center">
+                Todos
+            </button>
+<button class="h-[48px] px-md rounded-full bg-surface-container text-on-surface font-body-sm whitespace-nowrap shrink-0 flex items-center border border-outline-variant">
+                Alimentos
+            </button>
+<button class="h-[48px] px-md rounded-full bg-surface-container text-on-surface font-body-sm whitespace-nowrap shrink-0 flex items-center border border-outline-variant">
+                Bebidas
+            </button>
+<button class="h-[48px] px-md rounded-full bg-surface-container text-on-surface font-body-sm whitespace-nowrap shrink-0 flex items-center border border-outline-variant">
+                Limpieza
+            </button>
+</div>
+<!-- Inventory Summary -->
+<div class="flex justify-between items-end">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Inventario</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">42 artículos registrados</p>
+</div>
+<button class="text-primary font-body-sm font-bold hover:underline flex items-center gap-base h-[48px]">
+<span class="material-symbols-outlined" style="font-size: 18px;">filter_list</span> Filtrar
+            </button>
+</div>
+<!-- Products List -->
+<div class="space-y-md">
+<!-- Product Item 1 (Normal) -->
+<div class="sticker-card p-sm flex items-center gap-md">
+<div class="w-[80px] h-[80px] shrink-0 rounded-[16px] overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="A small packet of Venezuelan Harina P.A.N. cornmeal sitting on a clean, bright white surface. The lighting is high-key and studio-quality, emphasizing the product's details and vibrant yellow packaging. The background is slightly blurred but maintains a warm, energetic lilac tint consistent with a modern, friendly local commerce application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5WmwUXRHY_YTXZCpwlpf2VECyd7xZW7nCzhbJXWPhEqYECO0pzZD_ZlM2EISz0ua8rpEskRtLS8QbYjaI0aBvQ8HWOODGkRteab2cqfTA1kkWws536gk0XmSAfTGQTlOlvI-I7jhjPzv1aaDGMncKRww97k5sMwX8YraRU-uH6sHVpR7zcgsgOX1aFtfeCHCDf_YSU-QAythQa3GezcKZ0pXmO3npBcKtL0-TSH8U95PGjwklh8U"/>
+</div>
+<div class="flex-1 flex flex-col justify-center min-w-0">
+<h3 class="font-body-lg text-body-lg text-on-surface font-bold truncate">Harina P.A.N.</h3>
+<div class="flex items-center gap-xs mt-base">
+<span class="inline-flex items-center px-xs py-base rounded-sm bg-surface-container-high text-on-surface font-body-sm text-body-sm">
+                            Caja (20u)
+                        </span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Stock: <span class="font-bold text-on-surface">45</span></span>
+</div>
+</div>
+<div class="flex flex-col items-end shrink-0 text-right justify-center">
+<span class="font-price-primary text-price-primary text-primary">$1.10</span>
+<span class="font-price-secondary text-price-secondary text-outline">49.50 Bs</span>
+</div>
+</div>
+<!-- Product Item 2 (Low Stock Alert) -->
+<div class="sticker-card sticker-card-alert p-sm flex items-center gap-md relative overflow-hidden">
+<div class="absolute top-0 right-0 bg-error text-on-error px-sm py-base rounded-bl-lg font-label-caps text-[10px] uppercase font-bold tracking-wider">
+                    Poco Stock
+                </div>
+<div class="w-[80px] h-[80px] shrink-0 rounded-[16px] overflow-hidden bg-surface-container mt-sm md:mt-0">
+<img class="w-full h-full object-cover" data-alt="A 2-liter bottle of generic dark cola soda standing upright on a seamless white backdrop. The setting is brightly lit with a soft shadow to ground the object. The overall aesthetic is crisp, energetic, and clean, fitting for a fast-paced retail inventory interface with a subtle warm lilac undertone in the environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnO4JKxHPKNMcjb_DxJTaHvWzvdF01JWABPFQT70VcSLqmB51UDZbcXMigk6SGvZTxpzEBCAABtwuKyLM23ACUBDxbt5lKLl1O8wLdgdLdpYIm9091t3Ac_ixdxH_HIv9ZOQTqxYuNtZmttlsF2WmjurPYthGdq1HLuf35ps6LTlRt8qhzjxaZrtq2BRNKdRRKFi3hWLhb5mefdls54trWRDsrB8SXuBUxpIe6WU9gLyWwk5MKTbA"/>
+</div>
+<div class="flex-1 flex flex-col justify-center min-w-0 mt-sm md:mt-0">
+<h3 class="font-body-lg text-body-lg text-on-surface font-bold truncate">Refresco Cola 2L</h3>
+<div class="flex items-center gap-xs mt-base">
+<span class="inline-flex items-center px-xs py-base rounded-sm bg-surface-container-high text-on-surface font-body-sm text-body-sm">
+                            Unidad
+                        </span>
+<span class="font-body-sm text-body-sm text-error">Stock: <span class="font-bold">3</span></span>
+</div>
+</div>
+<div class="flex flex-col items-end shrink-0 text-right justify-center mt-sm md:mt-0">
+<span class="font-price-primary text-price-primary text-primary">$2.50</span>
+<span class="font-price-secondary text-price-secondary text-outline">112.50 Bs</span>
+</div>
+</div>
+<!-- Product Item 3 (Normal) -->
+<div class="sticker-card p-sm flex items-center gap-md">
+<div class="w-[80px] h-[80px] shrink-0 rounded-[16px] overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="A clear plastic bag containing 1kg of white rice, brightly lit on a pure white studio background. The packaging details are visible, and the scene implies a modern, efficient grocery inventory system. A soft, warm ambient light hints at an energetic lilac brand presence." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAw2tCjinCYU7f_VMRUn_8edumN5pGtlVA7UEl0kdqMs-Usr65DFaqc28IcyYqIvrnsV2zigh0D9PSYQ6pNdCONFYkA3hvfQYdnNxzM6mp4QcPlZcSbkyPTyLHTmD6PxSUnFzEaHV4TWEFhFdsGJVsa2DDeQN1kZWPFN7ocgh2z9eFM0pwTRHZHCASWMlWg7BKx6vJ7ADLRQwEy-2KHUjZX70_wy9ou1b4CTJivquO70C3OE6Yb_zg"/>
+</div>
+<div class="flex-1 flex flex-col justify-center min-w-0">
+<h3 class="font-body-lg text-body-lg text-on-surface font-bold truncate">Arroz Blanco 1kg</h3>
+<div class="flex items-center gap-xs mt-base">
+<span class="inline-flex items-center px-xs py-base rounded-sm bg-surface-container-high text-on-surface font-body-sm text-body-sm">
+                            Bulto (24u)
+                        </span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Stock: <span class="font-bold text-on-surface">120</span></span>
+</div>
+</div>
+<div class="flex flex-col items-end shrink-0 text-right justify-center">
+<span class="font-price-primary text-price-primary text-primary">$0.95</span>
+<span class="font-price-secondary text-price-secondary text-outline">42.75 Bs</span>
+</div>
+</div>
+<!-- Product Item 4 (Normal) -->
+<div class="sticker-card p-sm flex items-center gap-md">
+<div class="w-[80px] h-[80px] shrink-0 rounded-[16px] overflow-hidden bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-outline text-4xl">inventory_2</span>
+</div>
+<div class="flex-1 flex flex-col justify-center min-w-0">
+<h3 class="font-body-lg text-body-lg text-on-surface font-bold truncate">Azúcar Refinada 1kg</h3>
+<div class="flex items-center gap-xs mt-base">
+<span class="inline-flex items-center px-xs py-base rounded-sm bg-surface-container-high text-on-surface font-body-sm text-body-sm">
+                            Unidad
+                        </span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Stock: <span class="font-bold text-on-surface">34</span></span>
+</div>
+</div>
+<div class="flex flex-col items-end shrink-0 text-right justify-center">
+<span class="font-price-primary text-price-primary text-primary">$1.20</span>
+<span class="font-price-secondary text-price-secondary text-outline">54.00 Bs</span>
+</div>
+</div>
+</div>
+</main>
+<!-- Floating Action Button -->
+<button class="fixed right-lg bottom-[100px] w-14 h-14 bg-primary text-on-primary rounded-full shadow-lg flex items-center justify-center hover:opacity-90 active:scale-95 transition-transform z-40">
+<span class="material-symbols-outlined">add</span>
+</button>
+<!-- BottomNavBar -->
+<nav class="bg-surface-container-lowest dark:bg-surface-container-lowest fixed bottom-0 w-full z-50 h-[80px] border-t border-outline-variant shadow-[0px_-4px_20px_rgba(122,40,245,0.08)] flex justify-around items-center px-xs pb-safe-area-bottom md:hidden">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-all duration-200 active:scale-90 w-16 h-full rounded-lg" href="#">
+<span class="material-symbols-outlined mb-1">home</span>
+<span class="font-label-caps text-label-caps">Inicio</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary font-bold hover:bg-surface-container-low transition-all duration-200 active:scale-90 w-16 h-full rounded-lg" href="#">
+<span class="material-symbols-outlined fill mb-1">inventory_2</span>
+<span class="font-label-caps text-label-caps">Productos</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-tertiary-container text-on-tertiary-container rounded-full -mt-8 w-16 h-16 shadow-lg hover:opacity-90 transition-all duration-200 active:scale-90" href="#">
+<span class="material-symbols-outlined text-[28px]">add_shopping_cart</span>
+<span class="font-label-caps text-[10px] leading-[10px] mt-1 hidden">Vender</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-all duration-200 active:scale-90 w-16 h-full rounded-lg" href="#">
+<span class="material-symbols-outlined mb-1">payments</span>
+<span class="font-label-caps text-label-caps">Gastos</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-all duration-200 active:scale-90 w-16 h-full rounded-lg" href="#">
+<span class="material-symbols-outlined mb-1">history</span>
+<span class="font-label-caps text-label-caps">Historial</span>
+</a>
+</nav>
+<!-- Desktop Navigation Fallback (Hidden on Mobile) -->
+<nav class="hidden md:flex fixed top-0 w-full h-full left-0 pointer-events-none z-50">
+<!-- We rely on the top app bar on desktop, but for the sake of the shared components rules, 
+            if a sidenav were present it would go here. Since BottomNavBar is used, we hide it on md. -->
+</nav>
+</body></html>

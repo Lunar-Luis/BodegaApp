@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Vender - Tú Bodega Online</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&amp;family=JetBrains+Mono:wght@500;700&amp;family=Plus+Jakarta+Sans:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#ffd8e7",
+                        "on-surface": "#1d1735",
+                        "on-secondary-fixed": "#001e2b",
+                        "tertiary-fixed-dim": "#ffafd3",
+                        "on-tertiary-container": "#ffd3e4",
+                        "on-secondary-fixed-variant": "#004d66",
+                        "surface-tint": "#7620f1",
+                        "secondary-fixed": "#c0e8ff",
+                        "inverse-surface": "#322c4b",
+                        "error-container": "#ffdad6",
+                        "secondary": "#006686",
+                        "outline": "#7c7488",
+                        "on-primary-container": "#e7d8ff",
+                        "inverse-primary": "#d3bbff",
+                        "primary": "#5f00ce",
+                        "secondary-container": "#45c8fd",
+                        "on-tertiary": "#ffffff",
+                        "primary-container": "#7a28f5",
+                        "surface": "#fdf7ff",
+                        "surface-container-high": "#ece4ff",
+                        "surface-container": "#f2ebff",
+                        "on-background": "#1d1735",
+                        "surface-variant": "#e7deff",
+                        "on-tertiary-fixed-variant": "#8b005b",
+                        "on-secondary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "secondary-fixed-dim": "#70d2ff",
+                        "surface-container-low": "#f7f1ff",
+                        "inverse-on-surface": "#f5eeff",
+                        "surface-container-highest": "#e7deff",
+                        "on-surface-variant": "#4a4456",
+                        "tertiary": "#910060",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#fdf7ff",
+                        "outline-variant": "#ccc2d9",
+                        "on-tertiary-fixed": "#3d0026",
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#bc007d",
+                        "surface-dim": "#ded5fd",
+                        "background": "#fdf7ff",
+                        "on-error-container": "#93000a",
+                        "error": "#ba1a1a",
+                        "primary-fixed-dim": "#d3bbff",
+                        "on-secondary-container": "#00516c",
+                        "on-primary-fixed-variant": "#5b00c5",
+                        "primary-fixed": "#ebddff",
+                        "on-primary-fixed": "#250059"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "safe-area-bottom": "80px",
+                        "lg": "24px",
+                        "base": "4px",
+                        "xs": "8px",
+                        "xl": "32px",
+                        "md": "16px",
+                        "sm": "12px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "price-primary": ["JetBrains Mono"],
+                        "price-secondary": ["JetBrains Mono"],
+                        "body-sm": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["22px", { "lineHeight": "28px", "fontWeight": "700" }],
+                        "price-primary": ["18px", { "lineHeight": "22px", "fontWeight": "700" }],
+                        "price-secondary": ["13px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg": ["28px", { "lineHeight": "34px", "letterSpacing": "-0.02em", "fontWeight": "800" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background min-h-screen text-on-surface font-body-lg overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky z-40 bg-background flex items-center justify-between px-md py-sm w-full no-shadow">
+<button class="text-on-surface-variant hover:opacity-80 transition-transform active:scale-95 flex items-center justify-center w-12 h-12 rounded-full hover:bg-surface-container">
+<span class="material-symbols-outlined text-[24px]">storefront</span>
+</button>
+<h1 class="font-headline-md text-headline-md text-primary font-bold">Tú Bodega Online</h1>
+<button class="text-on-surface-variant hover:opacity-80 transition-transform active:scale-95 flex items-center justify-center w-12 h-12 rounded-full hover:bg-surface-container">
+<span class="material-symbols-outlined text-[24px]">search</span>
+</button>
+</header>
+<!-- Search / Scan Bar -->
+<div class="px-md py-sm sticky top-[76px] z-30 bg-background/90 backdrop-blur-md">
+<div class="h-[56px] bg-surface-container-lowest border border-outline-variant rounded-xl flex items-center px-md shadow-[0px_2px_8px_rgba(122,40,245,0.04)] focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all">
+<span class="material-symbols-outlined text-outline mr-sm">search</span>
+<input class="flex-grow bg-transparent border-none outline-none font-body-lg text-on-surface placeholder:text-outline h-full w-full" placeholder="Buscar o escanear..." type="text"/>
+<button class="w-10 h-10 flex items-center justify-center bg-surface-container rounded-lg text-primary hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined">barcode_scanner</span>
+</button>
+</div>
+</div>
+<!-- Main Content: Product Grid -->
+<main class="p-md pt-xs pb-[260px]">
+<div class="grid grid-cols-2 gap-md">
+<!-- Product Tile 1 (Active/In Cart) -->
+<div class="bg-surface-container-lowest rounded-[20px] p-xs border border-outline-variant shadow-[0px_4px_20px_rgba(122,40,245,0.08)] flex flex-col relative overflow-hidden group">
+<div class="relative w-full aspect-square rounded-lg overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="A brightly lit, high-contrast studio photograph of a classic yellow package of Harina P.A.N. cornmeal resting on a pristine white surface. The lighting is soft but vibrant, emphasizing the primary yellow color of the packaging against a very subtle, pale lilac background glow to match the app's modern sticker aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzoQ8WxaWeSDF9rMbVmJ9gxzAUfFFnSZADdmKhu5oCHdCQrl2IfhdfVie_olyFjSq09UOWZyAvwzK2XTKFROkvosjxa6kYh-gBv4To248LqRpLSgtOOetwJFmfaVRNnx4Jj_qnPDkG4MK2AdNzHUMUdtKT6ZMyJOG0JNPEFXmdBOWV2gRzI-lYXuR3d3Zls5VWv4RWFImHROik_D4h0zpbBBYcdx60eTtsYyUPsfvnCwwkW9aewtk"/>
+</div>
+<div class="mt-xs flex flex-col flex-grow justify-between">
+<h3 class="font-body-sm text-on-surface leading-tight line-clamp-2">Harina P.A.N. Maíz Blanco 1Kg</h3>
+<div class="flex flex-col items-end mt-xs">
+<span class="font-price-primary text-primary">$1.20</span>
+<span class="font-price-secondary text-on-surface-variant">Bs 43.80</span>
+</div>
+</div>
+<!-- Stepper Overlay -->
+<div class="absolute inset-0 bg-surface-container-lowest/85 backdrop-blur-[2px] rounded-[20px] flex items-center justify-center z-10 opacity-100 transition-opacity">
+<div class="flex items-center gap-sm bg-primary text-on-primary rounded-full px-sm py-xs shadow-lg">
+<button class="w-8 h-8 flex items-center justify-center hover:bg-white/20 rounded-full transition-colors"><span class="material-symbols-outlined text-[20px]">remove</span></button>
+<span class="font-price-primary text-[16px] w-6 text-center">2</span>
+<button class="w-8 h-8 flex items-center justify-center hover:bg-white/20 rounded-full transition-colors"><span class="material-symbols-outlined text-[20px]">add</span></button>
+</div>
+</div>
+</div>
+<!-- Product Tile 2 -->
+<div class="bg-surface-container-lowest rounded-[20px] p-xs border border-outline-variant shadow-[0px_4px_20px_rgba(122,40,245,0.08)] flex flex-col active:scale-95 transition-transform cursor-pointer">
+<div class="relative w-full aspect-square rounded-lg overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="A crisp, clean studio shot of a 2-liter bottle of dark cola soda, standing upright on a pure white surface. The lighting creates appealing reflections on the plastic bottle. The background is slightly out of focus with a very soft lavender tint, adhering to the clean, minimalist sticker design language of the UI." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJiB0dbBJF41ushvQeyala9NNYpebhyPKzEKUkP5YMTfTlPJdOBmvxrSvUmbpHIrrHhf9HtT8rDmvDDKKp_69PE3NoUR5pQHjxMQKzfFjZP0-JJHUHKoisaK7dtd4HWnbKgQmVLVLLoF0cCBZXWUaKG9bzXhyZVCHEG1x-Y7kNAAtlPwNE2NvwJFAa20ptfTsWjFVubhE013CZ9rbLkUkdc_ep3Rw89S-hngcxOFFvS6lc_JyEYHM"/>
+</div>
+<div class="mt-xs flex flex-col flex-grow justify-between">
+<h3 class="font-body-sm text-on-surface leading-tight line-clamp-2">Refresco Cola 2L</h3>
+<div class="flex flex-col items-end mt-xs">
+<span class="font-price-primary text-primary">$2.50</span>
+<span class="font-price-secondary text-on-surface-variant">Bs 91.25</span>
+</div>
+</div>
+</div>
+<!-- Product Tile 3 -->
+<div class="bg-surface-container-lowest rounded-[20px] p-xs border border-outline-variant shadow-[0px_4px_20px_rgba(122,40,245,0.08)] flex flex-col active:scale-95 transition-transform cursor-pointer">
+<div class="relative w-full aspect-square rounded-lg overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="A macro, well-lit studio image of a block of fresh white cheese (Queso Llanero) sitting on a minimalist white ceramic plate. The texture of the cheese is highly visible. The environment is bright and sterile, with a very subtle purple ambient glow coming from off-camera to tie into the app's brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPHzQI4wmep3_7CMcKdG2zGxS03a5kisYMxEQC4fknuM9A0wptnwxKKusfXal-sEfUoIwJw2qz4DBWP99rTdiR_KAjKyLzw6qB0Cznuf5m7p05FoyKB1sT3VFNB_fxtRhhGnKqjGU14Yy2G8D3Ke1RwLaZn0MO9jBEimYx1MVyh6g_vWrRey3IQ9AiWqThlaHRA9gSbFq5sdu3bKdSr9S__RdRdbMiNQHv9p_2AHLd4KMMpPQN2U0"/>
+</div>
+<div class="mt-xs flex flex-col flex-grow justify-between">
+<h3 class="font-body-sm text-on-surface leading-tight line-clamp-2">Queso Blanco Duro (1Kg)</h3>
+<div class="flex flex-col items-end mt-xs">
+<span class="font-price-primary text-primary">$4.00</span>
+<span class="font-price-secondary text-on-surface-variant">Bs 146.00</span>
+</div>
+</div>
+</div>
+<!-- Product Tile 4 (Active/In Cart) -->
+<div class="bg-surface-container-lowest rounded-[20px] p-xs border border-outline-variant shadow-[0px_4px_20px_rgba(122,40,245,0.08)] flex flex-col relative overflow-hidden group">
+<div class="relative w-full aspect-square rounded-lg overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="A clean, top-down photograph of a standard cardboard egg carton containing half a dozen brown eggs. Placed on a seamless white backdrop. The lighting is soft and even, eliminating harsh shadows, with a touch of a pale lilac gradient in the far background to match the energetic and friendly store aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6Cl8Y-A7_alj1qnKYhNIdAIkoV_wN-rMBAl_wocb7_WW4hMakOM4gdnfobac73__yRZi2qCZGMfxTy7RwdHIRpzYgnpDKtiH0E9dunoLcBTAXgD6qXh17tIRzCfYoPQ3j4fZHfFZ2oDtXj6L5zb-MPx3jOOXHeFXk6lPi0l7YZUJ425H3Bjs0XGsYR7lcAP9E9eL8viqYXGAhT3IxItNi5TrZGKUJSzJ_HxuMZj0H9qIyHku-oxs"/>
+</div>
+<div class="mt-xs flex flex-col flex-grow justify-between">
+<h3 class="font-body-sm text-on-surface leading-tight line-clamp-2">Cartón de Huevos (Medio)</h3>
+<div class="flex flex-col items-end mt-xs">
+<span class="font-price-primary text-primary">$2.50</span>
+<span class="font-price-secondary text-on-surface-variant">Bs 91.25</span>
+</div>
+</div>
+<!-- Stepper Overlay -->
+<div class="absolute inset-0 bg-surface-container-lowest/85 backdrop-blur-[2px] rounded-[20px] flex items-center justify-center z-10 opacity-100 transition-opacity">
+<div class="flex items-center gap-sm bg-primary text-on-primary rounded-full px-sm py-xs shadow-lg">
+<button class="w-8 h-8 flex items-center justify-center hover:bg-white/20 rounded-full transition-colors"><span class="material-symbols-outlined text-[20px]">remove</span></button>
+<span class="font-price-primary text-[16px] w-6 text-center">1</span>
+<button class="w-8 h-8 flex items-center justify-center hover:bg-white/20 rounded-full transition-colors"><span class="material-symbols-outlined text-[20px]">add</span></button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Live Cart Summary & Action (Sticky above Nav) -->
+<div class="fixed bottom-[80px] w-full z-40 bg-surface-container-lowest rounded-t-[24px] border-t border-outline-variant shadow-[0px_-8px_24px_rgba(122,40,245,0.12)] p-md pb-sm">
+<div class="flex justify-between items-end mb-sm">
+<div class="flex flex-col">
+<span class="font-label-caps text-on-surface-variant">3 ARTÍCULOS</span>
+<span class="font-price-secondary text-on-surface-variant mt-1">Total Bs 178.85</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-label-caps text-primary">TOTAL</span>
+<span class="font-headline-lg text-primary leading-none mt-1">$4.90</span>
+</div>
+</div>
+<button class="w-full h-[56px] bg-tertiary-container text-on-tertiary-container rounded-full font-headline-md flex items-center justify-center gap-sm shadow-md active:scale-95 transition-transform">
+<span>Cobrar</span>
+<span class="material-symbols-outlined">payments</span>
+</button>
+<p class="text-center font-body-sm text-on-surface-variant mt-sm text-[12px] opacity-70">
+            El inventario se actualizará automáticamente
+        </p>
+</div>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 h-[80px] bg-surface-container-lowest dark:bg-surface-container-lowest border-t border-outline-variant shadow-[0px_-4px_20px_rgba(122,40,245,0.08)] flex justify-around items-center px-xs pb-safe-area-bottom">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-all duration-200 active:scale-90 w-16 h-16 rounded-lg" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-caps text-label-caps mt-1">Inicio</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-all duration-200 active:scale-90 w-16 h-16 rounded-lg" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-label-caps text-label-caps mt-1">Productos</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary font-bold [&amp;:nth-child(3)]:bg-tertiary-container [&amp;:nth-child(3)]:text-on-tertiary-container [&amp;:nth-child(3)]:rounded-full [&amp;:nth-child(3)]:-mt-8 [&amp;:nth-child(3)]:w-16 [&amp;:nth-child(3)]:h-16 [&amp;:nth-child(3)]:shadow-lg hover:bg-surface-container-low transition-all duration-200 active:scale-90 relative z-10" href="#">
+<span class="material-symbols-outlined text-[28px]">add_shopping_cart</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-all duration-200 active:scale-90 w-16 h-16 rounded-lg" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-label-caps text-label-caps mt-1">Gastos</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-all duration-200 active:scale-90 w-16 h-16 rounded-lg" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-label-caps text-label-caps mt-1">Historial</span>
+</a>
+</nav>
+</body></html>
