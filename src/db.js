@@ -102,33 +102,24 @@ export async function subirFoto(blob) {
   return { url: data.publicUrl }
 }
 
-// Registra una venta completa: cabecera + ítems + descuento de stock/vendidos
+// Registra una venta completa en UNA sola operación atómica en el servidor
+// (cabecera + ítems + descuento de stock). El stock se calcula en la base
+// de datos, así queda correcto aunque haya ventas simultáneas.
 export async function crearVenta(venta, carrito, tasa) {
-  const { data: v, error } = await supabase
-    .from('ventas')
-    .insert({
-      fecha: venta.fecha, hora: venta.hora, metodo: venta.metodo,
-      ref4: venta.ref4 || null, tasa: venta.tasa, total_usd: venta.usd,
-    })
-    .select()
-    .single()
-  if (error || !v) return { error }
-
   const items = carrito.map((c) => ({
-    venta_id: v.id,
     producto_id: c.id,
     nombre: c.nombre,
     cantidad: c.qty,
     precio_usd: enUSD(c, tasa),
   }))
-  await supabase.from('venta_items').insert(items)
-
-  // Descontar stock y sumar vendidos por producto
-  for (const c of carrito) {
-    await supabase
-      .from('productos')
-      .update({ stock: Math.max(0, c.stock - c.qty), vendidos: (c.vendidos || 0) + c.qty })
-      .eq('id', c.id)
-  }
-  return { data: v }
+  const { data, error } = await supabase.rpc('registrar_venta', {
+    p_fecha: venta.fecha,
+    p_hora: venta.hora,
+    p_metodo: venta.metodo,
+    p_ref4: venta.ref4 || '',
+    p_tasa: venta.tasa,
+    p_total_usd: venta.usd,
+    p_items: items,
+  })
+  return { data, error }
 }

@@ -91,13 +91,12 @@ export default function App() {
         return c ? { ...p, stock: Math.max(0, p.stock - c.qty), vendidos: (p.vendidos || 0) + c.qty } : p
       }),
     )
-    showToast('Venta registrada · inventario actualizado')
     const { error } = await db.crearVenta(
       { fecha: todayISO(), hora: nowHora(), metodo, ref4, tasa, usd: totalUSD },
       carrito,
       tasa,
     )
-    if (error) showToast('No se pudo guardar la venta')
+    showToast(error ? 'No se pudo guardar la venta' : 'Venta registrada · inventario actualizado')
     refrescar()
   }
 
