@@ -34,7 +34,7 @@ function FotoPicker({ foto, onFoto }) {
           <span className="foto-empty"><Camera size={26} /><span>Agregar foto</span></span>
         )}
         {subiendo && <span className="foto-cargando"><span className="spinner" /></span>}
-        <input type="file" accept="image/*" capture="environment" onChange={elegir} hidden />
+        <input type="file" accept="image/*" onChange={elegir} hidden />
       </label>
       {preview && !subiendo && (
         <button type="button" className="foto-quitar" onClick={() => { setPreview(null); onFoto(null) }}>

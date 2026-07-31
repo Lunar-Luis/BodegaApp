@@ -202,14 +202,9 @@ function TasaSheet({ tasaActual, onClose, onGuardar }) {
         </div>
 
         <div className="label-caps muted" style={{ marginBottom: 8 }}>O tráela automática</div>
-        <div style={{ display: 'flex', gap: 10 }}>
-          <button className="btn ghost" onClick={() => traer('oficial')} disabled={!!cargando} style={{ flex: 1 }}>
-            {cargando === 'oficial' ? 'Cargando…' : 'BCV'}
-          </button>
-          <button className="btn ghost" onClick={() => traer('paralelo')} disabled={!!cargando} style={{ flex: 1 }}>
-            {cargando === 'paralelo' ? 'Cargando…' : 'Paralelo'}
-          </button>
-        </div>
+        <button className="btn ghost" onClick={() => traer('oficial')} disabled={!!cargando}>
+          {cargando === 'oficial' ? 'Cargando…' : 'Traer tasa del BCV'}
+        </button>
 
         {error && <div className="login-error" style={{ marginTop: 12 }}>{error}</div>}
 
