@@ -1,8 +1,9 @@
 import { useMemo, useState } from 'react'
-import { Share, Sell, Cash, ChevronLeft, ChevronRight, Calendar } from '../icons.jsx'
+import { FilePdf, Sell, Cash, ChevronLeft, ChevronRight, Calendar } from '../icons.jsx'
 import { metodoLabel } from '../mock.js'
 import { fmtUSD, fmtBs } from '../format.js'
 import { todayISO, monthKey, mesLabel, shiftMonth, shiftDay, fechaLarga } from '../dates.js'
+import { generarReportePDF } from '../pdf.js'
 
 // Totales de una lista usando la tasa guardada de cada registro
 function totales(list, tasaHoy) {
@@ -33,17 +34,17 @@ export default function Historial({ tasa, actividad, onToast }) {
   const irMes = (delta) => setMes(shiftMonth(mes, delta))
   const saltarAFecha = (iso) => { if (!iso) return; setDiaSel(iso); setMes(monthKey(iso)); setModo('dia') }
   const verDia = (f) => { setDiaSel(f); setModo('dia') }
+  const irHoy = () => { const h = todayISO(); setDiaSel(h); setMes(monthKey(h)); setModo('dia') }
 
-  const compartir = async () => {
+  const generarPDF = async () => {
     const t = modo === 'dia' ? tDia : tMes
     const titulo = modo === 'dia' ? fechaLarga(diaSel) : mesLabel(mes)
-    const txt = `Tú Bodega Online\n${titulo}\nVentas: ${fmtUSD(t.ventasUsd)}\nGastos: ${fmtUSD(t.gastosUsd)}\nBalance: ${fmtUSD(t.balanceUsd)}`
+    const registros = modo === 'dia' ? registrosDia : actMes
     try {
-      if (navigator.share) { await navigator.share({ title: 'Resumen', text: txt }); onToast?.('Resumen compartido') }
-      else { await navigator.clipboard.writeText(txt); onToast?.('Resumen copiado') }
+      onToast?.('Generando PDF…')
+      await generarReportePDF({ titulo, t, registros, tasa })
     } catch (e) {
-      if (e && e.name === 'AbortError') return
-      try { await navigator.clipboard.writeText(txt); onToast?.('Resumen copiado') } catch {}
+      onToast?.('No se pudo generar el PDF')
     }
   }
 
@@ -52,15 +53,16 @@ export default function Historial({ tasa, actividad, onToast }) {
       <div className="app-header">
         <div style={{ width: 40 }} />
         <span className="brand" style={{ fontSize: 20 }}>Historial</span>
-        <button className="icon-btn" aria-label="Compartir resumen" onClick={compartir}><Share size={20} /></button>
+        <button className="icon-btn" aria-label="Generar PDF" onClick={generarPDF}><FilePdf size={20} /></button>
       </div>
       <div className="screen">
-        {/* Selector Por día / Por mes */}
-        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 12 }}>
+        {/* Selector Por día / Por mes + Hoy */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
           <div className="toggle">
             <button className={modo === 'dia' ? 'on' : ''} onClick={() => setModo('dia')}>Por día</button>
             <button className={modo === 'mes' ? 'on' : ''} onClick={() => { setMes(monthKey(diaSel)); setModo('mes') }}>Por mes</button>
           </div>
+          <button className="chip" onClick={irHoy}>Hoy</button>
         </div>
 
         {/* Navegador (día o mes) + ir a fecha */}

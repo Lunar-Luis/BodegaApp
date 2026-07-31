@@ -82,6 +82,9 @@ export const Eye = (p) => (<S {...p}><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-
 export const Camera = (p) => (
   <S {...p}><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h3l2-3h8l2 3h3a2 2 0 012 2z" /><circle cx="12" cy="13" r="4" /></S>
 )
+export const FilePdf = (p) => (
+  <S {...p}><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" /><path d="M14 2v6h6" /><path d="M9 13v5M9 13h1.5a1.5 1.5 0 010 3H9M13.5 13v5M13.5 13H16M13.5 16h2" /></S>
+)
 export const EyeOff = (p) => (<S {...p}><path d="M9.9 4.2A11 11 0 0112 4c7 0 11 8 11 8a18 18 0 01-3 3.8M6.6 6.6A18 18 0 001 12s4 8 11 8a11 11 0 004.1-.8" /><path d="M9.9 9.9a3 3 0 004.2 4.2M1 1l22 22" /></S>)
 export const DollarBill = (p) => (
   <S {...p}><rect x="2" y="6" width="20" height="12" rx="2" /><path d="M12 9v6M13.5 10.5a1.6 1.6 0 00-1.5-1c-1 0-1.6.6-1.6 1.3 0 1.7 3.2 1 3.2 2.7 0 .8-.7 1.4-1.6 1.4a1.7 1.7 0 01-1.6-1" /></S>

@@ -1,9 +1,19 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Header from '../components/Header.jsx'
 import { Search, Plus, Close, Check, Edit, Camera, Trash, ProductIcon } from '../icons.jsx'
 import { fmtUSD, fmtBs, enUSD, enBs } from '../format.js'
 import { comprimirImagen } from '../image.js'
 import { subirFoto } from '../db.js'
+
+// Borradores en sessionStorage: si el teléfono recarga la página al tomar una
+// foto, el formulario que se estaba llenando se recupera y no se pierde.
+const SHEET_KEY = 'bodega:sheet' // 'nuevo' | 'editar:<id>'
+const draft = {
+  read: (k) => { try { const s = sessionStorage.getItem(k); return s ? JSON.parse(s) : null } catch { return null } },
+  write: (k, v) => { try { sessionStorage.setItem(k, JSON.stringify(v)) } catch {} },
+  clear: (k) => { try { sessionStorage.removeItem(k) } catch {} },
+}
+const setMarker = (v) => { try { v ? sessionStorage.setItem(SHEET_KEY, v) : sessionStorage.removeItem(SHEET_KEY) } catch {} }
 
 // Miniatura: muestra la foto del producto o, si no tiene, su ícono por tipo
 export function Miniatura({ producto, size = 24 }) {
@@ -49,6 +59,20 @@ export default function Productos({ tasa, productos, categorias, onAdd, onEditar
   const [filtro, setFiltro] = useState('Todos')
   const [q, setQ] = useState('')
   const [sheet, setSheet] = useState(null) // 'nuevo' | producto (ficha) | null
+
+  // Si la página recargó con un formulario abierto, reábrelo
+  useEffect(() => {
+    if (sheet) return
+    const m = sessionStorage.getItem(SHEET_KEY)
+    if (!m) return
+    if (m === 'nuevo') setSheet('nuevo')
+    else if (m.startsWith('editar:')) {
+      const p = productos.find((x) => x.id === m.slice(7))
+      if (p) setSheet(p)
+    }
+  }, [productos, sheet])
+
+  const abrirNuevo = () => { setMarker('nuevo'); setSheet('nuevo') }
 
   const lista = productos.filter((p) => {
     if (q && !p.nombre.toLowerCase().includes(q.toLowerCase())) return false
@@ -107,7 +131,7 @@ export default function Productos({ tasa, productos, categorias, onAdd, onEditar
         </div>
       </div>
 
-      <button className="fab" onClick={() => setSheet('nuevo')} aria-label="Agregar producto"><Plus size={26} /></button>
+      <button className="fab" onClick={abrirNuevo} aria-label="Agregar producto"><Plus size={26} /></button>
 
       {sheet === 'nuevo' && (
         <NuevoProducto categorias={categorias} onClose={() => setSheet(null)} onAdd={onAdd} onNuevaCategoria={onNuevaCategoria} />
@@ -159,14 +183,23 @@ function CategoriaSelector({ categorias, value, onChange, onNuevaCategoria }) {
   )
 }
 
+const NP_KEY = 'bodega:draft:nuevo'
 function NuevoProducto({ categorias, onClose, onAdd, onNuevaCategoria }) {
-  const [nombre, setNombre] = useState('')
-  const [cat, setCat] = useState(categorias[0] || '')
-  const [precio, setPrecio] = useState('')
-  const [moneda, setMoneda] = useState('USD')
-  const [cantidad, setCantidad] = useState('')
-  const [minimo, setMinimo] = useState('5')
-  const [foto, setFoto] = useState(null)
+  const saved = draft.read(NP_KEY)
+  const [nombre, setNombre] = useState(saved?.nombre ?? '')
+  const [cat, setCat] = useState(saved?.cat ?? (categorias[0] || ''))
+  const [precio, setPrecio] = useState(saved?.precio ?? '')
+  const [moneda, setMoneda] = useState(saved?.moneda ?? 'USD')
+  const [cantidad, setCantidad] = useState(saved?.cantidad ?? '')
+  const [minimo, setMinimo] = useState(saved?.minimo ?? '5')
+  const [foto, setFoto] = useState(saved?.foto ?? null)
+
+  // Guarda el borrador mientras se llena (sobrevive una recarga por la cámara)
+  useEffect(() => {
+    draft.write(NP_KEY, { nombre, cat, precio, moneda, cantidad, minimo, foto })
+  }, [nombre, cat, precio, moneda, cantidad, minimo, foto])
+
+  const cerrar = () => { draft.clear(NP_KEY); setMarker(null); onClose() }
 
   const guardar = () => {
     if (!nombre || !precio) return
@@ -181,15 +214,15 @@ function NuevoProducto({ categorias, onClose, onAdd, onNuevaCategoria }) {
       minimo: parseInt(minimo) || 0,
       foto_url: foto,
     })
-    onClose()
+    cerrar()
   }
 
   return (
-    <div className="sheet-backdrop" onClick={onClose}>
+    <div className="sheet-backdrop" onClick={cerrar}>
       <div className="sheet" onClick={(e) => e.stopPropagation()}>
         <div className="sheet-head">
           <h3>Nuevo producto</h3>
-          <button className="icon-btn" onClick={onClose}><Close size={22} /></button>
+          <button className="icon-btn" onClick={cerrar}><Close size={22} /></button>
         </div>
 
         <div className="field">
@@ -239,14 +272,27 @@ function NuevoProducto({ categorias, onClose, onAdd, onNuevaCategoria }) {
 }
 
 function FichaProducto({ producto, categorias, tasa, onClose, onEditar, onReponer, onGasto, onNuevaCategoria }) {
-  const [modo, setModo] = useState('ver') // 'ver' | 'editar'
+  const EK = 'bodega:draft:editar:' + producto.id
+  const reabriendo = (() => { try { return sessionStorage.getItem(SHEET_KEY) === 'editar:' + producto.id } catch { return false } })()
+  const savedE = reabriendo ? draft.read(EK) : null
+
+  const [modo, setModo] = useState(savedE ? 'editar' : 'ver') // 'ver' | 'editar'
   const [qty, setQty] = useState('')
   const [pasoGasto, setPasoGasto] = useState(false)
   const [monto, setMonto] = useState('')
   const [moneda, setMoneda] = useState('USD')
 
   // Estado edición
-  const [e, setE] = useState({ nombre: producto.nombre, cat: producto.cat, precio: String(producto.precio), moneda: producto.moneda, minimo: String(producto.minimo), foto_url: producto.foto_url || null })
+  const [e, setE] = useState(savedE || { nombre: producto.nombre, cat: producto.cat, precio: String(producto.precio), moneda: producto.moneda, minimo: String(producto.minimo), foto_url: producto.foto_url || null })
+
+  // Mientras se edita, guarda borrador y marca la hoja (sobrevive recarga por la cámara)
+  useEffect(() => {
+    if (modo === 'editar') { setMarker('editar:' + producto.id); draft.write(EK, e) }
+  }, [modo, e])
+
+  const limpiar = () => { draft.clear(EK); setMarker(null) }
+  const cerrar = () => { limpiar(); onClose() }
+  const cancelar = () => { limpiar(); setModo('ver') }
 
   const reponer = () => {
     const n = parseInt(qty)
@@ -271,15 +317,15 @@ function FichaProducto({ producto, categorias, tasa, onClose, onEditar, onRepone
       minimo: parseInt(e.minimo) || 0,
       foto_url: e.foto_url,
     })
-    onClose()
+    cerrar()
   }
 
   return (
-    <div className="sheet-backdrop" onClick={onClose}>
+    <div className="sheet-backdrop" onClick={cerrar}>
       <div className="sheet" onClick={(ev) => ev.stopPropagation()}>
         <div className="sheet-head">
           <h3>{modo === 'editar' ? 'Editar producto' : producto.nombre}</h3>
-          <button className="icon-btn" onClick={onClose}><Close size={22} /></button>
+          <button className="icon-btn" onClick={cerrar}><Close size={22} /></button>
         </div>
 
         {/* PASO: preguntar por el gasto tras reponer */}
@@ -337,7 +383,7 @@ function FichaProducto({ producto, categorias, tasa, onClose, onEditar, onRepone
               <input className="input" inputMode="numeric" value={e.minimo} onChange={(ev) => setE({ ...e, minimo: ev.target.value })} />
             </div>
             <button className="btn" onClick={guardarEdicion}><Check size={20} /> Guardar cambios</button>
-            <button className="btn ghost" style={{ marginTop: 10 }} onClick={() => setModo('ver')}>Cancelar</button>
+            <button className="btn ghost" style={{ marginTop: 10 }} onClick={cancelar}>Cancelar</button>
           </div>
         ) : (
           <div>
