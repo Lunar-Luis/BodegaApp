@@ -1,10 +1,13 @@
+import { useState } from 'react'
 import Header from '../components/Header.jsx'
-import { Up, Down, Warning, Edit, Sell, Cash, DollarBill, Phone, Sun, Moon, LogOut } from '../icons.jsx'
+import { Up, Down, Warning, Edit, Sell, Cash, DollarBill, Phone, Sun, Moon, LogOut, Close, Check } from '../icons.jsx'
 import { fmtUSD, fmtBs } from '../format.js'
 import { metodoLabel } from '../mock.js'
 import { todayISO } from '../dates.js'
+import { traerTasa } from '../tasaApi.js'
 
 export default function Inicio({ tasa, setTasa, productos, actividad, stockBajo, tema, alternarTema, onLogout }) {
+  const [tasaOpen, setTasaOpen] = useState(false)
   const hoy = new Date().toLocaleDateString('es-VE', { weekday: 'long', day: 'numeric', month: 'long' })
 
   const hoyISO = todayISO()
@@ -19,10 +22,6 @@ export default function Inicio({ tasa, setTasa, productos, actividad, stockBajo,
   const efectivoBs = ventas.filter((a) => a.metodo === 'efectivo_bs').reduce((s, a) => s + a.usd * (a.tasa || tasa), 0)
   const pagoMovil = ventas.filter((a) => a.metodo === 'pago_movil').reduce((s, a) => s + a.usd * (a.tasa || tasa), 0)
 
-  const editarTasa = () => {
-    const v = window.prompt('Tasa del día (Bs por $):', String(tasa))
-    if (v && !isNaN(parseFloat(v.replace(',', '.')))) setTasa(parseFloat(v.replace(',', '.')))
-  }
 
   return (
     <>
@@ -40,7 +39,7 @@ export default function Inicio({ tasa, setTasa, productos, actividad, stockBajo,
             <div className="h-greet">Hola</div>
             <div className="muted tiny" style={{ textTransform: 'capitalize' }}>{hoy}</div>
           </div>
-          <button className="rate-chip" onClick={editarTasa}>
+          <button className="rate-chip" onClick={() => setTasaOpen(true)}>
             <span className="label-caps muted">Tasa</span>
             <b>Bs {tasa.toLocaleString('es-VE')} / $</b>
             <Edit size={15} color="#7c7488" />
@@ -151,6 +150,73 @@ export default function Inicio({ tasa, setTasa, productos, actividad, stockBajo,
 
         <button className="logout-btn" onClick={onLogout}><LogOut size={17} /> Cerrar sesión</button>
       </div>
+
+      {tasaOpen && (
+        <TasaSheet tasaActual={tasa} onClose={() => setTasaOpen(false)} onGuardar={setTasa} />
+      )}
     </>
+  )
+}
+
+function TasaSheet({ tasaActual, onClose, onGuardar }) {
+  const [valor, setValor] = useState(String(tasaActual))
+  const [cargando, setCargando] = useState(null) // 'oficial' | 'paralelo' | null
+  const [error, setError] = useState('')
+
+  const traer = async (fuente) => {
+    setError('')
+    setCargando(fuente)
+    try {
+      const t = await traerTasa(fuente)
+      setValor(t.toFixed(2))
+    } catch {
+      setError('No se pudo traer la tasa. Revisa tu internet.')
+    }
+    setCargando(null)
+  }
+
+  const guardar = () => {
+    const v = parseFloat(String(valor).replace(',', '.'))
+    if (v > 0) onGuardar(v)
+    onClose()
+  }
+
+  return (
+    <div className="sheet-backdrop" onClick={onClose}>
+      <div className="sheet" onClick={(e) => e.stopPropagation()}>
+        <div className="sheet-head">
+          <h3>Tasa del día</h3>
+          <button className="icon-btn" onClick={onClose}><Close size={22} /></button>
+        </div>
+
+        <div className="field">
+          <label>Bs por $</label>
+          <input
+            className="input"
+            inputMode="decimal"
+            value={valor}
+            onChange={(e) => setValor(e.target.value)}
+            autoFocus
+            style={{ fontFamily: 'var(--font-mono)', fontWeight: 800, fontSize: 24, textAlign: 'center' }}
+          />
+        </div>
+
+        <div className="label-caps muted" style={{ marginBottom: 8 }}>O tráela automática</div>
+        <div style={{ display: 'flex', gap: 10 }}>
+          <button className="btn ghost" onClick={() => traer('oficial')} disabled={!!cargando} style={{ flex: 1 }}>
+            {cargando === 'oficial' ? 'Cargando…' : 'BCV'}
+          </button>
+          <button className="btn ghost" onClick={() => traer('paralelo')} disabled={!!cargando} style={{ flex: 1 }}>
+            {cargando === 'paralelo' ? 'Cargando…' : 'Paralelo'}
+          </button>
+        </div>
+
+        {error && <div className="login-error" style={{ marginTop: 12 }}>{error}</div>}
+
+        <button className="btn" onClick={guardar} style={{ marginTop: 18 }}>
+          <Check size={20} /> Guardar tasa
+        </button>
+      </div>
+    </div>
   )
 }
