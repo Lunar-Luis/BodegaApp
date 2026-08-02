@@ -70,7 +70,12 @@ export default function Vender({ tasa, productos, categorias = [], onCobrar, onR
             const qty = getQty(p.id)
             const agotado = p.stock <= 0
             return (
-              <div className={`card sell-tile ${qty ? 'in' : ''}`} key={p.id}>
+              <div
+                className={`card sell-tile ${qty ? 'in' : ''}`}
+                key={p.id}
+                onClick={() => !agotado && cambiar(p, +1)}
+                style={{ cursor: agotado ? 'default' : 'pointer' }}
+              >
                 <div className="thumb-lg">
                   <Miniatura producto={p} size={34} />
                 </div>
@@ -83,13 +88,14 @@ export default function Vender({ tasa, productos, categorias = [], onCobrar, onR
                   <span className="tile-stock" data-low={p.stock <= p.minimo}>{p.stock} disp.</span>
                 </div>
                 {qty ? (
-                  <div className="stepper">
+                  // stopPropagation: los botones – / + no deben disparar el "agregar" de la card
+                  <div className="stepper" onClick={(ev) => ev.stopPropagation()}>
                     <button onClick={() => cambiar(p, -1)}><Minus size={18} /></button>
                     <span className="qn">{qty}</span>
                     <button onClick={() => cambiar(p, +1)}><Plus size={18} /></button>
                   </div>
                 ) : (
-                  <button className="add-mini" onClick={() => cambiar(p, +1)} disabled={agotado} style={agotado ? { opacity: .5 } : null}>
+                  <button className="add-mini" onClick={(ev) => { ev.stopPropagation(); cambiar(p, +1) }} disabled={agotado} style={agotado ? { opacity: .5 } : null}>
                     {agotado ? 'Agotado' : '+ Agregar'}
                   </button>
                 )}

@@ -222,7 +222,7 @@ function NavItem({ id, label, tab, setTab, Icon }) {
 
 function SellNav({ active, onClick }) {
   return (
-    <button className="nav-item nav-sell" onClick={onClick}>
+    <button className={`nav-item nav-sell ${active ? 'active' : ''}`} onClick={onClick}>
       <span className="circle">
         <Sell size={26} />
       </span>

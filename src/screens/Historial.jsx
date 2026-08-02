@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { FilePdf, Sell, Cash, ChevronLeft, ChevronRight, Calendar, Refresh } from '../icons.jsx'
+import { FilePdf, Sell, Cash, ChevronLeft, ChevronRight, Calendar, Store } from '../icons.jsx'
 import { metodoLabel } from '../mock.js'
 import { fmtUSD, fmtBs } from '../format.js'
 import { todayISO, monthKey, mesLabel, shiftMonth, shiftDay, fechaLarga } from '../dates.js'
@@ -58,8 +58,8 @@ export default function Historial({ tasa, actividad, onToast, onRefrescar }) {
   return (
     <>
       <div className="app-header">
-        <button className="icon-btn" onClick={refrescar} aria-label="Actualizar">
-          <span className={spin ? 'spin' : ''} style={{ display: 'inline-flex' }}><Refresh size={20} /></span>
+        <button className="icon-btn brand" onClick={refrescar} aria-label="Actualizar">
+          <span className={spin ? 'spin' : ''} style={{ display: 'inline-flex' }}><Store size={22} /></span>
         </button>
         <span className="brand" style={{ fontSize: 20 }}>Historial</span>
         <button className="icon-btn" aria-label="Generar PDF" onClick={generarPDF}><FilePdf size={20} /></button>

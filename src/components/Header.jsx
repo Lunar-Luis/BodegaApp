@@ -1,6 +1,7 @@
 import { useState } from 'react'
-import { Store, Refresh } from '../icons.jsx'
+import { Store } from '../icons.jsx'
 
+// El ícono de la tienda es también el botón de "actualizar" (camuflado).
 export default function Header({ title = 'Tú Bodega Online', right = null, onRefresh }) {
   const [spin, setSpin] = useState(false)
 
@@ -12,13 +13,9 @@ export default function Header({ title = 'Tú Bodega Online', right = null, onRe
 
   return (
     <header className="app-header">
-      {onRefresh ? (
-        <button className="icon-btn" onClick={refrescar} aria-label="Actualizar">
-          <span className={spin ? 'spin' : ''} style={{ display: 'inline-flex' }}><Refresh size={22} /></span>
-        </button>
-      ) : (
-        <div className="brand"><Store size={24} /></div>
-      )}
+      <button className="icon-btn brand" onClick={refrescar} aria-label="Actualizar" disabled={!onRefresh}>
+        <span className={spin ? 'spin' : ''} style={{ display: 'inline-flex' }}><Store size={24} /></span>
+      </button>
       <span className="brand" style={{ fontSize: 17 }}>{title}</span>
       {/* Slot derecho (ej: botón de tema). Espaciador si no hay nada, para centrar el título */}
       {right || <div style={{ width: 40 }} />}
