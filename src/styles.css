@@ -396,6 +396,7 @@ input { font-family: inherit; }
 
 .cargando { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; color: var(--on-surface-variant); font-size: 15px; }
 .spinner { width: 38px; height: 38px; border-radius: 50%; border: 4px solid var(--container); border-top-color: var(--primary-container); animation: spin .8s linear infinite; }
+.spin { animation: spin .6s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
 
 .section { margin-top: 20px; }

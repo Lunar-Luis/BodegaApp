@@ -6,7 +6,7 @@ import { metodoLabel } from '../mock.js'
 import { todayISO } from '../dates.js'
 import { traerTasa } from '../tasaApi.js'
 
-export default function Inicio({ tasa, setTasa, productos, actividad, stockBajo, tema, alternarTema, onLogout }) {
+export default function Inicio({ tasa, setTasa, productos, actividad, stockBajo, tema, alternarTema, onLogout, onVerTodo, onRefrescar }) {
   const [tasaOpen, setTasaOpen] = useState(false)
   const hoy = new Date().toLocaleDateString('es-VE', { weekday: 'long', day: 'numeric', month: 'long' })
 
@@ -26,6 +26,7 @@ export default function Inicio({ tasa, setTasa, productos, actividad, stockBajo,
   return (
     <>
       <Header
+        onRefresh={onRefrescar}
         right={
           <button className="icon-btn" onClick={alternarTema} aria-label="Cambiar tema">
             {tema === 'dark' ? <Sun size={22} /> : <Moon size={22} />}
@@ -122,11 +123,11 @@ export default function Inicio({ tasa, setTasa, productos, actividad, stockBajo,
         <div className="section">
           <div className="section-head">
             <h3 className="h-section">Actividad reciente</h3>
-            <span className="link">Ver todo</span>
+            <button className="link" onClick={onVerTodo} style={{ background: 'none' }}>Ver todo</button>
           </div>
           <div className="card list">
             {actHoy.length === 0 && <div className="empty">Aún no hay movimientos hoy.</div>}
-            {actHoy.slice(0, 4).map((a) => (
+            {actHoy.slice(0, 5).map((a) => (
               <div className="row" key={a.id}>
                 <div className="left">
                   <div className="avatar" style={{ background: a.tipo === 'venta' ? 'var(--container)' : '#fef3c7', color: a.tipo === 'venta' ? 'var(--primary)' : 'var(--expense)' }}>

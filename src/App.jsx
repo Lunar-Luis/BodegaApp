@@ -172,6 +172,8 @@ export default function App() {
                 tema={tema}
                 alternarTema={alternarTema}
                 onLogout={cerrarSesion}
+                onVerTodo={() => setTab('historial')}
+                onRefrescar={refrescar}
               />
             )}
             {tab === 'productos' && (
@@ -184,13 +186,14 @@ export default function App() {
                 onReponer={reponerStock}
                 onGasto={registrarGasto}
                 onNuevaCategoria={agregarCategoria}
+                onRefrescar={refrescar}
               />
             )}
             {tab === 'vender' && (
-              <Vender tasa={tasa} productos={productos} categorias={categorias} onCobrar={registrarVenta} />
+              <Vender tasa={tasa} productos={productos} categorias={categorias} onCobrar={registrarVenta} onRefrescar={refrescar} />
             )}
-            {tab === 'gastos' && <Gastos tasa={tasa} actividad={actividad} onGuardar={registrarGasto} />}
-            {tab === 'historial' && <Historial tasa={tasa} actividad={actividad} onToast={showToast} />}
+            {tab === 'gastos' && <Gastos tasa={tasa} actividad={actividad} onGuardar={registrarGasto} onRefrescar={refrescar} />}
+            {tab === 'historial' && <Historial tasa={tasa} actividad={actividad} onToast={showToast} onRefrescar={refrescar} />}
           </>
         )}
 

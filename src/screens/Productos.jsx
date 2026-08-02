@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Header from '../components/Header.jsx'
 import { Search, Plus, Close, Check, Edit, Camera, Trash, ProductIcon } from '../icons.jsx'
 import { fmtUSD, fmtBs, enUSD, enBs } from '../format.js'
@@ -17,7 +17,7 @@ const setMarker = (v) => { try { v ? sessionStorage.setItem(SHEET_KEY, v) : sess
 
 // Miniatura: muestra la foto del producto o, si no tiene, su ícono por tipo
 export function Miniatura({ producto, size = 24 }) {
-  if (producto.foto_url) return <img src={producto.foto_url} alt={producto.nombre} className="prod-img" />
+  if (producto.foto_url) return <img src={producto.foto_url} alt={producto.nombre} className="prod-img" loading="lazy" decoding="async" />
   return <ProductIcon name={producto.icon} size={size} color="var(--primary)" />
 }
 
@@ -55,10 +55,12 @@ function FotoPicker({ foto, onFoto }) {
   )
 }
 
-export default function Productos({ tasa, productos, categorias, onAdd, onEditar, onReponer, onGasto, onNuevaCategoria }) {
+export default function Productos({ tasa, productos, categorias, onAdd, onEditar, onReponer, onGasto, onNuevaCategoria, onRefrescar }) {
   const [filtro, setFiltro] = useState('Todos')
   const [q, setQ] = useState('')
   const [sheet, setSheet] = useState(null) // 'nuevo' | producto (ficha) | null
+  const [visibles, setVisibles] = useState(30) // carga incremental (no todo de golpe)
+  const sentinela = useRef(null)
 
   // Si la página recargó con un formulario abierto, reábrelo
   useEffect(() => {
@@ -83,9 +85,21 @@ export default function Productos({ tasa, productos, categorias, onAdd, onEditar
 
   const chips = ['Todos', 'Stock bajo', ...categorias]
 
+  // Al cambiar filtro o búsqueda, vuelve a mostrar los primeros
+  useEffect(() => { setVisibles(30) }, [filtro, q])
+
+  // Carga incremental: cuando el usuario baja al final, muestra 30 más
+  useEffect(() => {
+    const el = sentinela.current
+    if (!el) return
+    const obs = new IntersectionObserver((e) => { if (e[0].isIntersecting) setVisibles((v) => v + 30) }, { rootMargin: '400px' })
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [lista.length])
+
   return (
     <>
-      <Header />
+      <Header onRefresh={onRefrescar} />
       <div className="screen">
         <div style={{ position: 'relative', marginBottom: 6 }}>
           <span style={{ position: 'absolute', left: 14, top: 15, color: 'var(--outline)' }}><Search size={20} /></span>
@@ -106,7 +120,7 @@ export default function Productos({ tasa, productos, categorias, onAdd, onEditar
         </div>
 
         <div className="card list" style={{ marginTop: 6 }}>
-          {lista.map((p) => {
+          {lista.slice(0, visibles).map((p) => {
             const low = p.stock <= p.minimo
             const agotado = p.stock <= 0
             return (
@@ -129,6 +143,11 @@ export default function Productos({ tasa, productos, categorias, onAdd, onEditar
           })}
           {lista.length === 0 && <div className="empty">No hay productos en este filtro.</div>}
         </div>
+        {visibles < lista.length && (
+          <div ref={sentinela} style={{ textAlign: 'center', padding: '14px', color: 'var(--outline)', fontSize: 13 }}>
+            Cargando más…
+          </div>
+        )}
       </div>
 
       <button className="fab" onClick={abrirNuevo} aria-label="Agregar producto"><Plus size={26} /></button>

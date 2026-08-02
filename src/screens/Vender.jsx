@@ -5,7 +5,7 @@ import { Miniatura } from './Productos.jsx'
 import { fmtUSD, fmtBs, enUSD, enBs } from '../format.js'
 import { METODOS } from '../mock.js'
 
-export default function Vender({ tasa, productos, categorias = [], onCobrar }) {
+export default function Vender({ tasa, productos, categorias = [], onCobrar, onRefrescar }) {
   const [q, setQ] = useState('')
   const [filtroCat, setFiltroCat] = useState('Todos')
   const [carrito, setCarrito] = useState([]) // {id, nombre, qty, ...}
@@ -50,7 +50,7 @@ export default function Vender({ tasa, productos, categorias = [], onCobrar }) {
 
   return (
     <>
-      <Header />
+      <Header onRefresh={onRefrescar} />
       <div className="screen" style={{ paddingBottom: carrito.length ? cartH + 120 : 120 }}>
         <div style={{ position: 'relative', marginBottom: 12 }}>
           <span style={{ position: 'absolute', left: 14, top: 15, color: 'var(--outline)' }}><Search size={20} /></span>

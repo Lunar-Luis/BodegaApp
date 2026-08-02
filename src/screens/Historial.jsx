@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { FilePdf, Sell, Cash, ChevronLeft, ChevronRight, Calendar } from '../icons.jsx'
+import { FilePdf, Sell, Cash, ChevronLeft, ChevronRight, Calendar, Refresh } from '../icons.jsx'
 import { metodoLabel } from '../mock.js'
 import { fmtUSD, fmtBs } from '../format.js'
 import { todayISO, monthKey, mesLabel, shiftMonth, shiftDay, fechaLarga } from '../dates.js'
@@ -16,12 +16,19 @@ function totales(list, tasaHoy) {
   return { ventasUsd, gastosUsd, balanceUsd: ventasUsd - gastosUsd, ventasBs, gastosBs, balanceBs: ventasBs - gastosBs }
 }
 
-export default function Historial({ tasa, actividad, onToast }) {
+export default function Historial({ tasa, actividad, onToast, onRefrescar }) {
   const hoy = todayISO()
   const [modo, setModo] = useState('dia') // 'dia' | 'mes'
   const [diaSel, setDiaSel] = useState(hoy)
   const [mes, setMes] = useState(monthKey(hoy))
   const [abierta, setAbierta] = useState(null)
+  const [spin, setSpin] = useState(false)
+
+  const refrescar = async () => {
+    if (!onRefrescar || spin) return
+    setSpin(true)
+    try { await onRefrescar() } finally { setTimeout(() => setSpin(false), 500) }
+  }
 
   const actMes = useMemo(() => actividad.filter((a) => monthKey(a.fecha) === mes), [actividad, mes])
   const diasDelMes = useMemo(() => [...new Set(actMes.map((a) => a.fecha))].sort((a, b) => b.localeCompare(a)), [actMes])
@@ -51,7 +58,9 @@ export default function Historial({ tasa, actividad, onToast }) {
   return (
     <>
       <div className="app-header">
-        <div style={{ width: 40 }} />
+        <button className="icon-btn" onClick={refrescar} aria-label="Actualizar">
+          <span className={spin ? 'spin' : ''} style={{ display: 'inline-flex' }}><Refresh size={20} /></span>
+        </button>
         <span className="brand" style={{ fontSize: 20 }}>Historial</span>
         <button className="icon-btn" aria-label="Generar PDF" onClick={generarPDF}><FilePdf size={20} /></button>
       </div>

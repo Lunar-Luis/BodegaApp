@@ -74,6 +74,9 @@ export const Sun = (p) => (
 export const Moon = (p) => (
   <S {...p}><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z" /></S>
 )
+export const Refresh = (p) => (
+  <S {...p}><path d="M21 12a9 9 0 11-2.64-6.36M21 3v6h-6" /></S>
+)
 export const ChevronLeft = (p) => (<S {...p}><path d="M15 18l-6-6 6-6" /></S>)
 export const ChevronRight = (p) => (<S {...p}><path d="M9 18l6-6-6-6" /></S>)
 export const ArrowLeft = (p) => (<S {...p}><path d="M19 12H5M12 19l-7-7 7-7" /></S>)

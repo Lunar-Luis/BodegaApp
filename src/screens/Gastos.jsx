@@ -10,7 +10,7 @@ const CATS = [
   { id: 'Gasto', Icon: Cash },
 ]
 
-export default function Gastos({ tasa, actividad, onGuardar }) {
+export default function Gastos({ tasa, actividad, onGuardar, onRefrescar }) {
   const [monto, setMonto] = useState('')
   const [moneda, setMoneda] = useState('USD')
   const [cat, setCat] = useState('Inventario')
@@ -31,7 +31,7 @@ export default function Gastos({ tasa, actividad, onGuardar }) {
 
   return (
     <>
-      <Header title="Gastos" />
+      <Header title="Gastos" onRefresh={onRefrescar} />
       <div className="screen">
         {/* Monto */}
         <div className="card" style={{ padding: 18, textAlign: 'center', marginBottom: 16 }}>
