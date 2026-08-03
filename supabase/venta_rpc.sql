@@ -16,7 +16,7 @@ create or replace function registrar_venta(
   p_items jsonb            -- [{producto_id, nombre, cantidad, precio_usd}, ...]
 ) returns uuid
 language plpgsql
-security definer
+security invoker            -- se ejecuta con los permisos del usuario (no elevados)
 set search_path = public
 as $$
 declare

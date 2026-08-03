@@ -411,6 +411,11 @@ input { font-family: inherit; }
 .spin { animation: spin .6s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
 
+/* ---- Aviso de conexión / offline ---- */
+.net-banner { text-align: center; font-size: 12.5px; font-weight: 700; padding: 6px 12px; flex-shrink: 0; }
+.net-banner.off { background: var(--expense-bg); color: var(--expense); }
+.net-banner.sync { background: var(--container); color: var(--primary); }
+
 .section { margin-top: 20px; }
 .section-head { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 10px; }
 .link { color: var(--primary-container); font-weight: 600; font-size: 13px; }

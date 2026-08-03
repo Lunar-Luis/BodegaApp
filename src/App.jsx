@@ -1,7 +1,8 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import * as db from './db.js'
 import { supabase } from './supabase.js'
 import { todayISO } from './dates.js'
+import { guardarCache, leerCache, leerCola, guardarCola, encolar, uid } from './local.js'
 import { Home, Inventory, Sell, Payments, History } from './icons.jsx'
 import Inicio from './screens/Inicio.jsx'
 import Productos from './screens/Productos.jsx'
@@ -20,6 +21,10 @@ export default function App() {
   const [cargando, setCargando] = useState(true)
   const [toast, setToast] = useState(null)
   const [tema, setTema] = useState(() => localStorage.getItem('tema') || 'light')
+  const [online, setOnline] = useState(navigator.onLine)
+  const [pendientes, setPendientes] = useState(() => leerCola().length)
+  const sincronizando = useRef(false)
+  const sincronizarRef = useRef(null)
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', tema)
@@ -32,7 +37,7 @@ export default function App() {
     setTimeout(() => setToast(null), 2200)
   }
 
-  // Cargar / refrescar todo desde Supabase
+  // Cargar / refrescar todo desde Supabase (con manejo de "sin conexión")
   const refrescar = async () => {
     try {
       const d = await db.cargarTodo()
@@ -40,10 +45,37 @@ export default function App() {
       setActividad(d.actividad)
       setCategorias(d.categorias)
       setTasaState(d.tasa)
+      setOnline(true)
+      return true
     } catch (e) {
-      showToast('Sin conexión con la base de datos')
+      setOnline(false) // sin conexión: se mantienen los datos en caché
+      return false
     }
   }
+
+  // Sube a la nube las ventas/gastos que quedaron en cola (hechos sin internet)
+  const sincronizar = async () => {
+    if (sincronizando.current || !navigator.onLine) return
+    let cola = leerCola()
+    if (!cola.length) return
+    sincronizando.current = true
+    for (const op of [...cola]) {
+      try {
+        let res
+        if (op.tipo === 'venta') res = await db.crearVenta(op.payload.venta, op.payload.carrito, op.payload.venta.tasa)
+        else if (op.tipo === 'gasto') res = await db.crearGasto(op.payload.gasto)
+        if (res && res.error) throw res.error
+        cola = leerCola().filter((x) => x.id !== op.id)
+        guardarCola(cola)
+        setPendientes(cola.length)
+      } catch (e) {
+        break // sigue sin conexión / error → se reintenta después
+      }
+    }
+    sincronizando.current = false
+    if (leerCola().length === 0) await refrescar()
+  }
+  sincronizarRef.current = sincronizar
 
   // Control de sesión (login compartido)
   useEffect(() => {
@@ -54,12 +86,33 @@ export default function App() {
 
   const cerrarSesion = () => supabase.auth.signOut()
 
-  // Cargar datos solo cuando hay sesión
+  // Al entrar: muestra primero la copia local (sirve sin internet), luego actualiza y sincroniza
   useEffect(() => {
     if (!session) return
+    const c = leerCache()
+    if (c) {
+      setProductos(c.productos || [])
+      setActividad(c.actividad || [])
+      setCategorias(c.categorias || [])
+      setTasaState(c.tasa ?? 42.5)
+    }
     setCargando(true)
-    refrescar().finally(() => setCargando(false))
+    refrescar().finally(() => { setCargando(false); sincronizar() })
   }, [session])
+
+  // Guardar copia local de los datos (para verlos sin internet)
+  useEffect(() => {
+    if (!cargando && session) guardarCache({ productos, actividad, categorias, tasa })
+  }, [productos, actividad, categorias, tasa, cargando, session])
+
+  // Detectar cuando vuelve/ se va el internet
+  useEffect(() => {
+    const goOnline = () => { setOnline(true); sincronizarRef.current && sincronizarRef.current() }
+    const goOffline = () => setOnline(false)
+    window.addEventListener('online', goOnline)
+    window.addEventListener('offline', goOffline)
+    return () => { window.removeEventListener('online', goOnline); window.removeEventListener('offline', goOffline) }
+  }, [])
 
   // Sincronización en tiempo real entre dispositivos (solo con sesión)
   useEffect(() => {
@@ -84,6 +137,7 @@ export default function App() {
   }
 
   const registrarVenta = async (carrito, totalUSD, metodo, ref4) => {
+    const venta = { fecha: todayISO(), hora: nowHora(), metodo, ref4, tasa, usd: totalUSD }
     // Optimista: descontar stock al instante
     setProductos((prev) =>
       prev.map((p) => {
@@ -91,19 +145,48 @@ export default function App() {
         return c ? { ...p, stock: Math.max(0, p.stock - c.qty), vendidos: (p.vendidos || 0) + c.qty } : p
       }),
     )
-    const { error } = await db.crearVenta(
-      { fecha: todayISO(), hora: nowHora(), metodo, ref4, tasa, usd: totalUSD },
-      carrito,
-      tasa,
-    )
-    showToast(error ? 'No se pudo guardar la venta' : 'Venta registrada · inventario actualizado')
-    refrescar()
+
+    const guardarOffline = () => {
+      encolar({ id: uid(), tipo: 'venta', payload: { venta, carrito } })
+      setPendientes(leerCola().length)
+      setActividad((prev) => [actividadLocalVenta(venta, carrito, prev), ...prev])
+      setOnline(false)
+      showToast('Venta guardada sin conexión · se subirá al volver el internet')
+    }
+
+    if (!navigator.onLine) return guardarOffline()
+    try {
+      const { error } = await db.crearVenta(venta, carrito, tasa)
+      if (error) throw error
+      showToast('Venta registrada · inventario actualizado')
+      refrescar()
+    } catch (e) {
+      guardarOffline()
+    }
   }
 
   const registrarGasto = async (gasto) => {
-    showToast('Gasto guardado')
-    await db.crearGasto({ ...gasto, fecha: todayISO(), hora: nowHora(), tasa })
-    refrescar()
+    const g = { ...gasto, fecha: todayISO(), hora: nowHora(), tasa }
+    const guardarOffline = () => {
+      encolar({ id: uid(), tipo: 'gasto', payload: { gasto: g } })
+      setPendientes(leerCola().length)
+      setActividad((prev) => [
+        { id: 'local-' + uid(), tipo: 'gasto', fecha: g.fecha, hora: g.hora, cat: g.cat, desc: g.desc, tasa: g.tasa, usd: g.usd, pendiente: true },
+        ...prev,
+      ])
+      setOnline(false)
+      showToast('Gasto guardado sin conexión · se subirá al volver el internet')
+    }
+
+    if (!navigator.onLine) return guardarOffline()
+    try {
+      const res = await db.crearGasto(g)
+      if (res && res.error) throw res.error
+      showToast('Gasto guardado')
+      refrescar()
+    } catch (e) {
+      guardarOffline()
+    }
   }
 
   const agregarProducto = async (prod) => {
@@ -155,6 +238,7 @@ export default function App() {
   return (
     <div className="phone-wrap">
       <div className="phone">
+        <NetBanner online={online} pendientes={pendientes} />
         {cargando ? (
           <div className="cargando">
             <div className="spinner" />
@@ -234,4 +318,33 @@ function SellNav({ active, onClick }) {
 function nowHora() {
   const d = new Date()
   return d.toLocaleTimeString('es-VE', { hour: '2-digit', minute: '2-digit', hour12: false })
+}
+
+// Actividad local de una venta hecha sin conexión (para mostrarla al instante)
+function actividadLocalVenta(venta, carrito, actividad) {
+  const numero = 1000 + actividad.filter((a) => a.tipo === 'venta').length + 1
+  return {
+    id: 'local-' + uid(),
+    numero,
+    tipo: 'venta',
+    fecha: venta.fecha,
+    hora: venta.hora,
+    metodo: venta.metodo,
+    ref4: venta.ref4 || undefined,
+    tasa: venta.tasa,
+    usd: venta.usd,
+    items: carrito.map((c) => `${c.qty}x ${c.nombre}`),
+    pendiente: true,
+  }
+}
+
+// Aviso de estado de conexión / pendientes
+function NetBanner({ online, pendientes }) {
+  if (online && pendientes === 0) return null
+  const texto = !online
+    ? pendientes > 0
+      ? `Sin conexión · ${pendientes} por sincronizar`
+      : 'Sin conexión · trabajando offline'
+    : `Sincronizando… ${pendientes} pendiente${pendientes !== 1 ? 's' : ''}`
+  return <div className={`net-banner ${online ? 'sync' : 'off'}`}>{texto}</div>
 }
