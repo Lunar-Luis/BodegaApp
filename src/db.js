@@ -27,6 +27,12 @@ export async function cargarTodo() {
     supabase.from('config').select('tasa').eq('id', 1).single(),
   ])
 
+  // Sin internet, Supabase no lanza error: devuelve datos vacíos con .error.
+  // Detectamos ese caso y lanzamos, para NO pisar la copia local con vacío.
+  if (prod.error || ventas.error || gastos.error) {
+    throw prod.error || ventas.error || gastos.error
+  }
+
   const productos = (prod.data || []).map(mapProducto)
 
   const ventasMap = (ventas.data || []).map((v, i) => ({
